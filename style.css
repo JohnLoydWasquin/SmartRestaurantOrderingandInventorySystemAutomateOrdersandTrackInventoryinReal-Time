@@ -144,12 +144,17 @@
 
 .red_btn i{
     color: white;
+    transition: all 0.2s;
 }
 
 .red_btn:hover{
     background-color: white;
     box-shadow: 0 2px 15px rgb(250, 120, 69);
     border: 1px solid rgb(253, 77, 8);
+    color: rgb(253, 77, 8);
+}
+
+.red_btn:hover i{
     color: rgb(253, 77, 8);
 }
 
@@ -209,5 +214,33 @@
     }
     .headerbar .account ul{
         justify-content: space-between;
+    }
+}
+
+@media only screen and (max-width: 550px){
+    .main_slide div:nth-child(1){
+        font-size: 18px;
+    }
+
+    .main_slide div:nth-child(1) p{
+        padding-top: 5px;
+        margin: 10px 0;
+        font-size: 11px;
+    }
+
+    .red_btn{
+        margin-top: 10px;
+        width: 120px;
+        line-height: 30px;
+        font-size: 12px;
+        padding: 0 10px;
+    }
+
+    .main_slide div:nth-child(1) span{
+        text-underline-offset: 5px;
+    }
+
+    .main_slide div:nth-child(2) img{
+        width: 70vw;
     }
 }

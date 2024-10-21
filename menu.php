@@ -6,10 +6,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="icon" type="image/x-icon" href="websiteImage/LogoFP.webp">
-    <title>Samgyup Paradise</title>
+    <title>Unlimited menu - Samgyup Paradise</title>
 </head>
 <body>
-    <header>
+<header>
         <div class="header">
             <div class="headerbar">
                 <div class="account">
@@ -51,7 +51,6 @@
                         </a>
                     </ul>
                 </div>
-                <?php include 'menu.php'; ?>
             </div>
             <div class="logo">
                 <h2>SAMGYUP PARADISE</h2>
@@ -60,7 +59,6 @@
                 <i class="fa-solid fa-bars"></i>
                 <i class="fa-solid fa-xmark" id="hdcross"></i>
             </div>
-            <?php include 'menu.php'; ?>
             <div class="nav">
                 <ul>
                     <a href="main.html">
@@ -101,23 +99,7 @@
                 </ul>
             </div>
         </div>
-    </header>
-
-    <div class="home">
-        <div class="main_slide">
-            <div>
-                <h1>Welcome to <span>Samgyup</span>
-                    Paradise, Healthy and Yummy.
-                </h1>
-                <p>Your Ultimate Destination for Authentic Korean BBQ Delights! Grill, Savor, and Enjoy the Perfect Samgyupsal Experience with Premium Cuts, Fresh Ingredients, and Unmatched Flavors.</p>
-
-                <button class="red_btn">Visit Now <i class="fa-solid fa-arrow-right-long"></i></button>
-            </div>
-            <div>
-                <img src="websiteImage/samgImage.png" alt="samgImage">
-            </div>
-        </div>
-    </div>
+    </header> 
 
     <script src="main.js"></script>
 </body>
