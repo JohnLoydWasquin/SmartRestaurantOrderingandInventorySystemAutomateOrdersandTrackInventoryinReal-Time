@@ -214,6 +214,118 @@
     color: rgb(253, 77, 8);
 }
 
+/*--------------RESERVE TABLE CSS---------------*/
+
+.footer {
+    background-color: black;
+    color: white;
+    padding: 50px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    width: 100%;
+    padding: 0 30px;
+}
+
+/* Dine With Us Section */
+.dine-with-us {
+    flex: 1;
+    text-align: left;
+}
+
+.dine-with-us h2 {
+    color: white;
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.table-img {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    margin-top: 20px;
+}
+
+/* Right Side (Reservation and Opening Times) */
+.footer-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.reserve {
+    margin-bottom: 50px;
+}
+
+.reserve h2 {
+    color: #ff4500;
+    font-size: 28px;
+}
+
+.reserve p {
+    color: #ff69b4;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.book-now-btn {
+    background-color: white;
+    color: black;
+    padding: 12px 25px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.book-now-btn:hover {
+    background-color: #ff4500;
+    color: white;
+}
+
+/* Opening Times Section */
+.opening-times h2 {
+    color: #ff4500; /* Reddish-orange */
+    font-size: 28px;
+}
+
+.opening-times h3 {
+    color: #ff1493; /* Bright pink/red */
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.opening-times p {
+    color: #ffffff;
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-right {
+        margin-top: 40px;
+    }
+
+    .dine-with-us, .footer-right {
+        max-width: 100%;
+    }
+}
+
 /*--------------MENU CSS---------------*/
 
 .menu-section {
@@ -430,3 +542,4 @@
         width: 70vw;
     }
 }
+

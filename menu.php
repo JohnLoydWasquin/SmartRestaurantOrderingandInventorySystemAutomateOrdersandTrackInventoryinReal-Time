@@ -28,7 +28,7 @@
                             <input type="search" placeholder="Search...">
                             <i class="fa-solid fa-magnifying-glass srchicon"></i>
                         </div>
-                        <a href="#">
+                        <a href="login.html">
                             <li>
                                 <i class="fa-solid fa-user" id="user-mb"></i>
                             </li>
@@ -103,7 +103,7 @@
                         <input type="search" placeholder="Search...">
                         <i class="fa-solid fa-magnifying-glass srchicon"></i>
                     </div>
-                    <a href="#">
+                    <a href="login.html">
                         <li>
                             <i class="fa-solid fa-user" id="user-lap"></i>
                         </li>
@@ -112,7 +112,7 @@
             </div>
         </div>
     </header> 
-
+    
     <div class="menu-section">
         <h1>UNLI <span>SAMGYUPSAL</span> MENU</h1>
         <div class="menu-category">
