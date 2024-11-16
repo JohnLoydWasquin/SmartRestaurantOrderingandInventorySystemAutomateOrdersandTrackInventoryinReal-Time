@@ -9,6 +9,31 @@ body{
     background-color: rgb(248, 232, 217);
 }
 
+/*--------------BackButton CSS---------------*/
+.back {
+    width: 50px;
+    height: 50px;
+    background-color: rgb(253, 77, 8);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.back a {
+    color: white;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+.back:hover {
+    transform: scale(1.1);
+    background-color: #8e24aa;
+}
+
 .container{
     background: #fff;
     width: 450px;
