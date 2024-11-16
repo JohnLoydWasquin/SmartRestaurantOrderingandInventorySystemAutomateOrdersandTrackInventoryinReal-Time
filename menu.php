@@ -132,7 +132,6 @@ try {
     error_log("Database connection failed: " . $e->getMessage());
 }
 
-// Initialize total_cost if not set
 if (!isset($_SESSION['total_cost'])) {
     $_SESSION['total_cost'] = 0;
 }
@@ -295,10 +294,8 @@ function addToCart(menu_id, menu_name, price, quantity = 1) {
             quantity: quantity
         },
         success: function(response) {
-            // Parse the JSON response
             const data = JSON.parse(response);
 
-            // Update the total cost in the basket button
             if (data.total_cost) {
                 document.getElementById("basket-total").innerText = `Total: $${data.total_cost}`;
             }
