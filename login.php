@@ -1,44 +1,94 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
     session_start();
-    require_once 'mainDB.php';
-    
-    if(isset($_POST['signUp'])){
-        $fName = $_POST['fName'];
-        $lName = $_POST['lName'];
-        $phoneNumber = $_POST['tNumber'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $password = md5($password);
+}
+require_once 'mainDB.php';
 
-        $checkEmail = "SELECT * FROM Users where email = '$email'";
-        $result = $conn->query($checkEmail);
-        if($result->num_rows>0){
-            echo '<h1>The email already exists!</h1>';
-        }else{
-            $insertQuery = "INSERT INTO Users(firstName, lastName, PhoneNumber, email, password)
-            VALUES('$fName', '$lName', '$phoneNumber', '$email', '$password')";
-            if($conn->query($insertQuery)==TRUE){
-                header("Location: login.html");
-            }else{
-                echo 'Error:' . $conn->$exception;
-            }
+class User {
+    private $db;
+
+    public function __construct($database) {
+        $this->db = $database;
+    }
+
+    public function register($fName, $lName, $phoneNumber, $email, $password) {
+        $password = md5($password);
+        $conn = $this->db->getConnection();
+
+        // Check if yung email ay nag eexist na
+        $checkEmailQuery = "SELECT * FROM Users WHERE email = ?";
+        $stmt = $conn->prepare($checkEmailQuery);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            return "The email already exists!";
+        }
+
+        $insertQuery = "INSERT INTO Users (firstName, lastName, PhoneNumber, email, password) VALUES (?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($insertQuery);
+        $stmt->bind_param("sssss", $fName, $lName, $phoneNumber, $email, $password);
+
+        if ($stmt->execute()) {
+            return true; // Registration successful
+        } else {
+            return "Error: " . $stmt->error;
         }
     }
 
-    if(isset($_POST['signIn'])){
-        $email = $_POST['email'];
-        $password = $_POST['password'];
+    public function login($email, $password) {
         $password = md5($password);
+        $conn = $this->db->getConnection();
 
-        $sql = "SELECT * FROM users WHERE email = '$email' AND password = '$password'";
-        $result = $conn->query($sql);
-        if($result->num_rows>0){
+        $sql = "SELECT * FROM Users WHERE email = ? AND password = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ss", $email, $password);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             $_SESSION['email'] = $row['email'];
-            header("Location: main.html");
-            exit();
-        }else{
-            echo "
+            $_SESSION['firstName'] = $row['firstName'];
+            $_SESSION['user_id'] = $row['user_id']; // Assuming 'id' is the user ID column
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+
+$db = new Database();
+$user = new User($db);
+
+if (isset($_POST['signUp'])) {
+    $fName = $_POST['fName'];
+    $lName = $_POST['lName'];
+    $phoneNumber = $_POST['tNumber'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $result = $user->register($fName, $lName, $phoneNumber, $email, $password);
+
+    if ($result === true) {
+        header("Location: login.html");
+        exit();
+    } else {
+        echo "<h1>$result</h1>";
+    }
+}
+
+if (isset($_POST['signIn'])) {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    if ($user->login($email, $password)) {
+        header("Location: main.html");
+        exit();
+    } else {
+        echo "
         <!DOCTYPE html>
         <html lang='en'>
         <head>
@@ -49,20 +99,19 @@
         </head>
         <body>
         <script>
-
         Swal.fire({
             title: 'Error!',
-            text: 'Incorrect password or email try again!',
+            text: 'Incorrect password or email. Try again!',
             icon: 'error',
-            confirmButtonText: 'okay'
-            }).then((result) => {
-            if(result.isConfirmed) {
+            confirmButtonText: 'Okay'
+        }).then((result) => {
+            if (result.isConfirmed) {
                 window.location.href = 'login.html';
             }
         });
         </script>
         </body>
-        </html> ";
-        }
+        </html>";
     }
+}
 ?>
