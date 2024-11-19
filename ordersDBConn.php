@@ -1,10 +1,8 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+session_start();
 require 'mainDB.php'; // Include your database connection
 require 'Cart.php';
-require 'login.php';
+require 'ordersDBConn.php';
 
 if (!isset($_SESSION['user_id'])) {
     echo "Error: You must log in before placing an order.";
@@ -20,16 +18,15 @@ if (empty($cart_items)) {
     exit;
 }
 
+// Database connection
 $db = new Database();
 $conn = $db->getConnection();
 
-$user_id = $_SESSION['user_id'];
+$user_id = $_SESSION['user_id']; // Logged-in user's ID
 $grand_total = 0;
 
 // Prepare SQL for inserting orders
-$insertOrderQuery = "INSERT INTO menusbenta (user_id, menu_id, menu_name, price, quantity, total) VALUES (?, ?, ?, ?, ?, ?)ON DUPLICATE KEY UPDATE 
-    quantity = quantity + VALUES(quantity),
-    total = total + VALUES(total)";
+$insertOrderQuery = "INSERT INTO Orders (user_id, menu_id, menu_name, price, quantity, total) VALUES (?, ?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($insertOrderQuery);
 
 // Insert each cart item into the Orders table
@@ -48,7 +45,33 @@ foreach ($cart_items as $item) {
     $stmt->execute();
 }
 
+// Clear the cart after placing the order
+$_SESSION['cart'] = [];
+
 // Confirmation message and redirect
-header('Location: checkout.php');
+echo "
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>Order Confirmation</title>
+    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+</head>
+<body>
+<script>
+Swal.fire({
+    title: 'Success!',
+    text: 'Your order has been placed successfully!',
+    icon: 'success',
+    confirmButtonText: 'Okay'
+}).then((result) => {
+    if (result.isConfirmed) {
+        window.location.href = 'menu.php'; // Redirect back to menu
+    }
+});
+</script>
+</body>
+</html>";
 exit;
 ?>

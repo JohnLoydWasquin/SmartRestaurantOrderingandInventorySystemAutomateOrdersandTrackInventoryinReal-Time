@@ -216,10 +216,10 @@
 
 /*--------------RESERVE TABLE CSS---------------*/
 
-.footer {
+.footer1 {
     background-color: black;
     color: white;
-    padding: 50px 0;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -234,7 +234,6 @@
     padding: 0 30px;
 }
 
-/* Dine With Us Section */
 .dine-with-us {
     flex: 1;
     text-align: left;
@@ -243,7 +242,7 @@
 .dine-with-us h2 {
     color: white;
     font-size: 32px;
-    margin-bottom: 10px;
+    margin-top: 20px;
 }
 
 .table-img {
@@ -251,6 +250,7 @@
     max-width: 450px;
     height: auto;
     margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 /* Right Side (Reservation and Opening Times) */
@@ -262,6 +262,8 @@
 }
 
 .reserve {
+    margin-top: 30px;
+    padding-left: 30px;
     margin-bottom: 50px;
 }
 
@@ -295,14 +297,15 @@
 
 /* Opening Times Section */
 .opening-times h2 {
-    color: #ff4500; /* Reddish-orange */
+    color: #ff4500;
     font-size: 28px;
+    margin-top: 30px;
 }
 
 .opening-times h3 {
-    color: #ff1493; /* Bright pink/red */
+    color: #ff1493;
     font-size: 20px;
-    margin-top: 10px;
+    margin-top: 30px;
 }
 
 .opening-times p {
@@ -325,6 +328,49 @@
         max-width: 100%;
     }
 }
+
+/*--------------FOOTER CSS---------------*/
+
+.footer2 {
+    background-color: rgb(248, 232, 217);
+    color: white;
+    padding: 50px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.footer-container2 {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1200px;
+    width: 100%;
+    padding: 0 30px;
+}
+
+.webFooter h2{
+    flex: 1;
+    text-align: left;
+}
+
+.footer-right2{
+    flex: 4;
+    text-align: center;
+}
+
+.footer-right2 a{
+    justify-content: space-between;
+}
+
+.footer-right2 a:hover{
+    color: rgb(253, 57, 8);
+}
+
+.footer-right3 a:hover{
+    color: rgb(253, 57, 8);
+}
+
 
 /*--------------MENU CSS---------------*/
 
@@ -435,7 +481,7 @@
     line-height: 50px;
     background-color: rgb(253, 77, 8);
     border-radius: 5px;
-    border: 1px solid rgb(253, 77, 8);
+    border: 10px solid rgb(253, 77, 8);
     box-shadow: 0 10px 15px rgb(250, 120, 69);
     transition: all 0.2s;
 }
@@ -454,6 +500,32 @@
 
 .basket-btn:hover i{
     color: rgb(253, 77, 8);
+}
+
+/*--------------QUANTITY CSS---------------*/
+
+.quantity-input {
+    width: 60px; 
+    height: 30px;
+    text-align: center;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 5px 0;
+    transition: border-color 0.3s;
+}
+
+.quantity-input:focus {
+    border-color: #ff5a5f;
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 90, 95, 0.5);
+}
+
+.quantity-label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-right: 5px;
+    color: #333;
 }
 
 @media only screen and (max-width: 768px) {
@@ -542,4 +614,5 @@
         width: 70vw;
     }
 }
+
 

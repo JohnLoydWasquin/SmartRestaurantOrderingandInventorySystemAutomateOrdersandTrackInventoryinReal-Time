@@ -6,7 +6,7 @@ try {
     $pdo = new PDO("mysql:host=localhost;dbname=samgyup_paradise", "root", "");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $stmt = $pdo->prepare("SELECT menu_id, menu_name, description, price, category, quantity FROM menus WHERE category = 'Pork'");
+    $stmt = $pdo->prepare("SELECT menu_id, menu_name, description, price, category, quantity FROM menus WHERE category = 'Beef'");
     $stmt->execute();
     $menu_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -14,58 +14,34 @@ try {
         $menu_items = [
             [
                 'menu_id' => 1,
-                'menu_name' => 'Dae-Pae',
-                'description' => 'Thinly sliced, flavorful pork belly strips.',
+                'menu_name' => 'Beef Samgyup',
+                'description' => 'Thinly sliced beef.',
                 'price' => 199,
-                'category' => 'Pork',
+                'category' => 'Beef',
                 'quantity' => 255
             ],
             [
                 'menu_id' => 2,
-                'menu_name' => 'Buljib',
-                'description' => 'Tenderized fresh pork belly with a honeycomb cut.',
-                'price' => 249,
-                'category' => 'Pork',
+                'menu_name' => 'Yangnyum Beef',
+                'description' => 'Marinated beef slices coated in a sweet and savory sauce.',
+                'price' => 549,
+                'category' => 'Beef',
                 'quantity' => 255
             ],
             [
                 'menu_id' => 3,
-                'menu_name' => 'YangnyumDae-pae',
-                'description' => 'Marinated in a sweet & spicy sauce.',
+                'menu_name' => 'Bulgogi',
+                'description' => 'Thin & tender slices of beef marinated in a sweet soy-based sauce.',
                 'price' => 549,
-                'category' => 'Pork',
+                'category' => 'Beef',
                 'quantity' => 255
             ],
             [
                 'menu_id' => 4,
-                'menu_name' => 'YangnyumBuljib',
-                'description' => 'Marinated in a sweet & spicy sauce.',
-                'price' => 349,
-                'category' => 'Pork',
-                'quantity' => 255
-            ],
-            [
-                'menu_id' => 5,
-                'menu_name' => 'Gochujang',
-                'description' => 'Marinated in a fermented red chili paste.',
-                'price' => 200,
-                'category' => 'Pork',
-                'quantity' => 255
-            ],
-            [
-                'menu_id' => 6,
-                'menu_name' => 'Moksal',
-                'description' => 'A leaner texture with a more intense porky flavor.',
-                'price' => 449,
-                'category' => 'Pork',
-                'quantity' => 255
-            ],
-            [
-                'menu_id' => 7,
-                'menu_name' => 'MoksalYangnyum',
-                'description' => 'A marinated pork neck meat in a sweet and savory sauce.',
-                'price' => 400,
-                'category' => 'Pork',
+                'menu_name' => 'Beef Enoki',
+                'description' => 'Thinly sliced beef and enoki mushrooms wrapped together.',
+                'price' => 499,
+                'category' => 'Beef',
                 'quantity' => 255
             ]
         ];
@@ -74,65 +50,40 @@ try {
     $menu_items = [
         [
             'menu_id' => 1,
-            'menu_name' => 'Dae-Pae',
-            'description' => 'Thinly sliced, flavorful pork belly strips.',
+            'menu_name' => 'Beef Samgyup',
+            'description' => 'Thinly sliced beef.',
             'price' => 199,
-            'category' => 'Pork',
+            'category' => 'Beef',
             'quantity' => 255
         ],
         [
             'menu_id' => 2,
-            'menu_name' => 'Buljib',
-            'description' => 'Tenderized fresh pork belly with a honeycomb cut.',
-            'price' => 249,
-            'category' => 'Pork',
+            'menu_name' => 'Yangnyum Beef',
+            'description' => 'Marinated beef slices coated in a sweet and savory sauce.',
+            'price' => 549,
+            'category' => 'Beef',
             'quantity' => 255
         ],
         [
             'menu_id' => 3,
-            'menu_name' => 'YangnyumDae-pae',
-            'description' => 'Marinated in a sweet & spicy sauce.',
+            'menu_name' => 'Bulgogi',
+            'description' => 'Thin & tender slices of beef marinated in a sweet soy-based sauce.',
             'price' => 549,
-            'category' => 'Pork',
+            'category' => 'Beef',
             'quantity' => 255
         ],
         [
             'menu_id' => 4,
-            'menu_name' => 'YangnyumBuljib',
-            'description' => 'Marinated in a sweet & spicy sauce.',
-            'price' => 349,
-            'category' => 'Pork',
-            'quantity' => 255
-        ],
-        [
-            'menu_id' => 5,
-            'menu_name' => 'Gochujang',
-            'description' => 'Marinated in a fermented red chili paste.',
-            'price' => 200,
-            'category' => 'Pork',
-            'quantity' => 255
-        ],
-        [
-            'menu_id' => 6,
-            'menu_name' => 'Moksal',
-            'description' => 'A leaner texture with a more intense porky flavor.',
-            'price' => 449,
-            'category' => 'Pork',
-            'quantity' => 255
-        ],
-        [
-            'menu_id' => 7,
-            'menu_name' => 'MoksalYangnyum',
-            'description' => 'A marinated pork neck meat in a sweet and savory sauce.',
-            'price' => 400,
-            'category' => 'Pork',
+            'menu_name' => 'Beef Enoki',
+            'description' => 'Thinly sliced beef and enoki mushrooms wrapped together.',
+            'price' => 499,
+            'category' => 'Beef',
             'quantity' => 255
         ]
-];
+    ];
     error_log("Database connection failed: " . $e->getMessage());
 }
 
-// Initialize total_cost if not set
 if (!isset($_SESSION['total_cost'])) {
     $_SESSION['total_cost'] = 0;
 }
@@ -146,7 +97,7 @@ if (!isset($_SESSION['total_cost'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="icon" type="image/x-icon" href="websiteImage/LogoFP.webp">
-    <title>Unlimited menu - Samgyup Paradise</title>
+    <title>Beef Menu - Samgyup Paradise</title>
 </head>
 <body>
 <header>
@@ -251,73 +202,44 @@ if (!isset($_SESSION['total_cost'])) {
                 </ul>
             </div>
         </div>
-</header> 
+    </header>
 
 <div class="menu-section" id="menu">
     <h1>UNLI <span>SAMGYUPSAL</span> MENU</h1>
     <div class="menu-category">
-    <span class="category-label">PORK MENU</span>
+        <span class="category-label">BEEF MENU</span>
     </div>
     <div class="menu-items">
-    <?php foreach ($menu_items as $item): ?>
-        <div class="menu-item">
-        <img src="websiteImage/porkmenu<?php echo $item['menu_id']; ?>.png" alt="<?php echo htmlspecialchars($item['menu_name']); ?>">
-            <h3><?php echo htmlspecialchars($item['menu_name']); ?></h3>
-            <p><?php echo htmlspecialchars($item['description']); ?></p>
-            <form action="add_to_cart.php" method="POST" id="menus">
-                <input type="hidden" name="menu_id" value="<?php echo htmlspecialchars($item['menu_id']); ?>">
-                <input type="hidden" name="menu_name" value="<?php echo htmlspecialchars($item['menu_name']); ?>">
-                <input type="hidden" name="price" value="<?php echo htmlspecialchars($item['price']); ?>">
-                <input type="hidden" name="description" value="<?php echo htmlspecialchars($item['description']); ?>">
-                <input type="hidden" name="category" value="<?php echo htmlspecialchars($item['category']); ?>">
-                <input type="hidden" name="menu_type" value="<?php echo htmlspecialchars($menu_type); ?>">
-                <label for="quantity_<?php echo htmlspecialchars($item['menu_id']); ?>">Quantity:</label>
-                <input 
-                    type="number" 
-                    id="quantity_<?php echo htmlspecialchars($item['menu_id']); ?>" 
-                    name="quantity" 
-                    class="quantity-input" 
-                    min="1" 
-                    max="<?php echo htmlspecialchars($item['quantity']); ?>" 
-                    value="1">
-                <button type="submit" class="add-to-cart">Add To Cart</button>
-                <span class="price">₱<?php echo number_format($item['price'], 2); ?></span>
-            </form>
-        </div>
+        <?php foreach ($menu_items as $item): ?>
+            <div class="menu-item">
+                <img src="websiteImage/beefmenu<?php echo $item['menu_id']; ?>.png" alt="<?php echo htmlspecialchars($item['menu_name']); ?>">
+                <h3><?php echo htmlspecialchars($item['menu_name']); ?></h3>
+                <p><?php echo htmlspecialchars($item['description']); ?></p>
+                <form action="add_to_cart.php" method="POST">
+                    <input type="hidden" name="menu_id" value="<?php echo htmlspecialchars($item['menu_id']); ?>">
+                    <input type="hidden" name="menu_name" value="<?php echo htmlspecialchars($item['menu_name']); ?>">
+                    <input type="hidden" name="price" value="<?php echo htmlspecialchars($item['price']); ?>">
+                    <label for="quantity_<?php echo $item['menu_id']; ?>">Quantity:</label>
+                    <input 
+                        type="number" 
+                        id="quantity_<?php echo $item['menu_id']; ?>" 
+                        name="quantity" 
+                        class="quantity-input" 
+                        min="1" 
+                        max="<?php echo htmlspecialchars($item['quantity']); ?>" 
+                        value="1">
+                    <button type="submit" class="add-to-cart">Add To Cart</button>
+                    <span class="price">₱<?php echo number_format($item['price'], 2); ?></span>
+                </form>
+            </div>
         <?php endforeach; ?>
     </div>
     <div class="total-amount-btn">
-    <a href="cartTable.php" class="basket-btn" id="basket-total">
-    Basket <i>•</i> ₱<?php echo number_format($_SESSION['total_cost'] ?? 0, 2); ?>
-    </a>
+        <a href="cartTable.php" class="basket-btn" id="basket-total">
+            Basket <i>•</i> ₱<?php echo number_format($_SESSION['total_cost'], 2); ?>
+        </a>
     </div>
 </div>
-    <script src="main.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-    function addToCart(menu_id, menu_name, price, quantity = 1) {
-    $.ajax({
-        url: 'add_to_cart.php',
-        type: 'POST',
-        data: {
-            menu_id: menu_id,
-            menu_name: menu_name,
-            price: price,
-            quantity: quantity
-        },
-        success: function(response) {
-            const data = JSON.parse(response);
-            
-            if (data.total_cost) {
-                document.getElementById("basket-total").innerText = `Total: $${data.total_cost}`;
-            }
-        },
-        error: function() {
-            alert("There was an error adding the item to the cart.");
-        }
-    });
-}
-</script>
-
+<script src="main.js"></script>
 </body>
 </html>
