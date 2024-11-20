@@ -17,6 +17,8 @@ $cart_items = $cart->getCartItems();
     <title>Your Cart</title>
     <!-- Include Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
@@ -72,8 +74,25 @@ $cart_items = $cart->getCartItems();
 
     <div class="text-center">
         <a href="menu.php" class="btn btn-secondary">Back to Menu</a>
-        <a href="basketOrder.php" class="btn btn-success">Checkout</a>
+        <a href="basketOrder.php" class="btn btn-success" id="checkoutBtn">Checkout</a>
     </div>
 </div>
+<script>
+    document.getElementById('checkoutBtn').addEventListener('click', function (event) {
+        const isCartEmpty = <?php echo empty($cart_items) ? 'true' : 'false'; ?>;
+
+        if (isCartEmpty) {
+            event.preventDefault();
+            Swal.fire({
+                icon: 'warning',
+                title: 'Your cart is empty',
+                text: 'Please add some items to your cart before checking out.',
+                confirmButtonText: 'OK'
+            });
+        } else {
+            window.location.href = 'basketOrder.php';
+        }
+    });
+</script>
 </body>
 </html>
