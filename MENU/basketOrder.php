@@ -2,12 +2,35 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-require '../DATABASE/mainDB.php'; // Include your database connection
+require '../DATABASE/mainDB.php';
 require '../MENU/Cart.php';
 require '../LOGIN/login.php';
 
 if (!isset($_SESSION['user_id'])) {
-    echo "Error: You must log in before placing an order.";
+    echo "
+        <!DOCTYPE html>
+        <html lang='en'>
+        <head>
+            <meta charset='UTF-8'>
+            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+            <title>SweetAlert</title>
+            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+        </head>
+        <body>
+        <script>
+        Swal.fire({
+            title: 'Login Required',
+            text: 'You must log in before placing an order.',
+            icon: 'error',
+            confirmButtonText: 'Okay'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = '../LOGIN/login.html';
+            }
+        });
+        </script>
+        </body>
+        </html>";
     exit;
 }
 
