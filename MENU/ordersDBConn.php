@@ -1,8 +1,8 @@
 <?php
 session_start();
-require 'mainDB.php'; // Include your database connection
-require 'Cart.php';
-require 'ordersDBConn.php';
+require '../DATABASE/mainDB.php'; // Include your database connection
+require '../MENU/Cart.php';
+require '../MENU/ordersDBConn.php';
 
 if (!isset($_SESSION['user_id'])) {
     echo "Error: You must log in before placing an order.";
@@ -67,7 +67,7 @@ Swal.fire({
     confirmButtonText: 'Okay'
 }).then((result) => {
     if (result.isConfirmed) {
-        window.location.href = 'menu.php'; // Redirect back to menu
+        window.location.href = '../MENU/menu.php';
     }
 });
 </script>

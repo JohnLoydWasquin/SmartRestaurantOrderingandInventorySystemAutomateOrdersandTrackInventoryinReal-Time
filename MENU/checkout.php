@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'mainDB.php';
+include '../DATABASE/mainDB.php';
 
 $cart = isset($_SESSION['cart']) ? $_SESSION['cart'] : [];
 

@@ -2,9 +2,9 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-require 'mainDB.php'; // Include your database connection
-require 'Cart.php';
-require 'login.php';
+require '../DATABASE/mainDB.php'; // Include your database connection
+require '../MENU/Cart.php';
+require '../LOGIN/login.php';
 
 if (!isset($_SESSION['user_id'])) {
     echo "Error: You must log in before placing an order.";
@@ -49,6 +49,6 @@ foreach ($cart_items as $item) {
 }
 
 // Confirmation message and redirect
-header('Location: checkout.php');
+header('Location: ../MENU/checkout.php');
 exit;
 ?>

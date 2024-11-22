@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'Cart.php';
+require '../MENU/Cart.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cart = new Cart();
@@ -9,9 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $quantity = intval($_POST['quantity']);
 
     if ($cart->updateItem($index, $quantity)) {
-        header('Location: cartTable.php?message=Item updated successfully');
+        header('Location: ../MENU/cartTable.php?message=Item updated successfully');
     } else {
-        header('Location: cartTable.php?message=Failed to update item');
+        header('Location: ../MENU/cartTable.php?message=Failed to update item');
     }
     exit;
 }

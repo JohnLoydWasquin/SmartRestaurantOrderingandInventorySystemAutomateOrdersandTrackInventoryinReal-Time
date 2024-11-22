@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'Cart.php';
+require '../MENU/Cart.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cart = new Cart();
@@ -8,9 +8,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $index = intval($_POST['index']);
 
     if ($cart->removeItem($index)) {
-        header('Location: cartTable.php?message=Item removed successfully');
+        header('Location: ../MENU/cartTable.php?message=Item removed successfully');
     } else {
-        header('Location: cartTable.php?message=Failed to remove item');
+        header('Location: ../MENU/cartTable.php?message=Failed to remove item');
     }
     exit;
 }
