@@ -96,7 +96,7 @@ if (!isset($_SESSION['total_cost'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="../MAIN/style.css">
-    <link rel="icon" type="image/x-icon" href="websiteImage/LogoFP.webp">
+    <link rel="icon" type="image/x-icon" href="../websiteImage/LogoFP.webp">
     <title>Beef Menu - Samgyup Paradise</title>
 </head>
 <body>
