@@ -3,7 +3,7 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once 'Cart.php';
+require_once '../MENU/Cart.php';
 
 $cart = new Cart();
 $cart_items = $cart->getCartItems();
@@ -55,7 +55,7 @@ $cart_items = $cart->getCartItems();
                     </td>
                     <td>₱<?php echo number_format($total, 2); ?></td>
                     <td>
-                        <form action="remove_cart.php" method="POST" style="display: inline;">
+                        <form action="../MENU/remove_cart.php" method="POST" style="display: inline;">
                             <input type="hidden" name="index" value="<?php echo $index; ?>">
                             <button type="submit" class="btn btn-sm btn-danger">Remove</button>
                         </form>
@@ -73,8 +73,8 @@ $cart_items = $cart->getCartItems();
     <?php endif; ?>
 
     <div class="text-center">
-        <a href="menu.php" class="btn btn-secondary">Back to Menu</a>
-        <a href="basketOrder.php" class="btn btn-success" id="checkoutBtn">Checkout</a>
+        <a href="../MENU/menu.php" class="btn btn-secondary">Back to Menu</a>
+        <a href="../MENU/basketOrder.php" class="btn btn-success" id="checkoutBtn">Checkout</a>
     </div>
 </div>
 <script>
@@ -90,7 +90,7 @@ $cart_items = $cart->getCartItems();
                 confirmButtonText: 'OK'
             });
         } else {
-            window.location.href = 'basketOrder.php';
+            window.location.href = '../MENU/basketOrder.php';
         }
     });
 </script>

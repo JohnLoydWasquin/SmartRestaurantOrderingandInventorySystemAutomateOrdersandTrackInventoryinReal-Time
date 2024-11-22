@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" type="text/css" href="login.css">
+    <link rel="stylesheet" type="text/css" href="../LOGIN/login.css">
     <!-- SweetAlert2 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <!-- SweetAlert2 JS --> 
@@ -15,11 +15,11 @@
 </head>
 <body>
     <div class="back">
-        <a href="main.html"><i class="fa-sharp fa-solid fa-circle-arrow-left"></i></a>
+        <a href="../MAIN/main.html"><i class="fa-sharp fa-solid fa-circle-arrow-left"></i></a>
     </div>
     <div class="container" id="signUp" style="display: none;">
         <h1 class="form-title">Create Accounts</h1>
-        <form method="post" action="login.php">
+        <form method="post" action="../LOGIN/login.php">
             <div class="input-group">
                 <i class="fas fa-user"></i>
                 <input type="text" name="fName" id="fName" placeholder="First Name" required>
@@ -62,7 +62,7 @@
 
     <div class="container" id="signIn">
         <h1 class="form-title">Welcome back</h1>
-        <form method="post" action="login.php">
+        <form method="post" action="../LOGIN/login.php">
             <div class="input-group">
                 <i class="fas fa-envelope"></i>
                 <input type="text" name="email" id="email" placeholder="Email" required>
@@ -90,6 +90,6 @@
                 </div>
         </form>
     </div>
-    <script src="login.js"></script>
+    <script src="../LOGIN/login.js"></script>
 </body>
 </html>

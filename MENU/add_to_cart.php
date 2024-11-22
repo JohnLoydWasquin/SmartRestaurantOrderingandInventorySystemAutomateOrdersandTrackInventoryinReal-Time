@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'mainDB.php';
+require_once '../DATABASE/mainDB.php';
 
 class Cart {
     private $db;
@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = $cart->addMenu($user_id, $menu_name, $description, $price, $category, $quantity);
 
         if ($result === true) {
-            header("Location: menu.php");
+            header("Location: ../MENU/menu.php");
             exit();
         } else {
             echo "<h1>$result</h1>";

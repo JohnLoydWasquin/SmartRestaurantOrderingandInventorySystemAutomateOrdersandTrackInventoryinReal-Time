@@ -2,7 +2,7 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-require_once 'mainDB.php';
+require_once '../DATABASE/mainDB.php';
 
 class User {
     private $db;
@@ -73,7 +73,7 @@ if (isset($_POST['signUp'])) {
     $result = $user->register($fName, $lName, $phoneNumber, $email, $password);
 
     if ($result === true) {
-        header("Location: login.html");
+        header("Location: ../LOGIN/login.html");
         exit();
     } else {
         echo "<h1>$result</h1>";
@@ -85,7 +85,7 @@ if (isset($_POST['signIn'])) {
     $password = $_POST['password'];
 
     if ($user->login($email, $password)) {
-        header("Location: main.html");
+        header("Location: ../MAIN/main.html");
         exit();
     } else {
         echo "
@@ -106,7 +106,7 @@ if (isset($_POST['signIn'])) {
             confirmButtonText: 'Okay'
         }).then((result) => {
             if (result.isConfirmed) {
-                window.location.href = 'login.html';
+                window.location.href = '../LOGIN/login.html';
             }
         });
         </script>
