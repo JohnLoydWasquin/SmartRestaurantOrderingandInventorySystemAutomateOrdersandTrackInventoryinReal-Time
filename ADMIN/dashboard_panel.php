@@ -68,12 +68,15 @@
                 $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
 
                 require_once '../ADMIN/dashboard_function.php';
+                require_once '../ADMIN/userAdmin_function.php';
 
                 $dashboardFunctions = new DashboardFunctions();
+                $userAdmin = new UserAdminFunction();
 
                 $totalUsers = $dashboardFunctions->getTotalUsers();
                 $totalRevenue = $dashboardFunctions->getTotalRevenue();
                 $popularItem = $dashboardFunctions->getPopulatItem();
+                $users = $userAdmin->getAllUsers();
                 // $pendingOrders = $dashboardFunctions->getPendingOrders();
                 if ($page == 'dashboard') {
                     echo '<h2>Dashboard Overview</h2>
@@ -123,29 +126,22 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>John Doe</td>
-                                <td>john@example.com</td>
-                                <td>Admin</td>
+                        <tbody>';
+                        foreach ($users as $user) {
+                            echo '<tr>
+                                <td>' . htmlspecialchars($user['user_id']) . '</td>
+                                <td>' . htmlspecialchars($user['firstName']) . '</td>
+                                <td>' . htmlspecialchars($user['email']) . '</td>
+                                <td>' . htmlspecialchars($user['role'] ?? 'User') . '</td>
                                 <td>
                                     <button class="btn btn-sm btn-primary">Edit</button>
                                     <button class="btn btn-sm btn-danger">Delete</button>
                                 </td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Jane Smith</td>
-                                <td>jane@example.com</td>
-                                <td>User</td>
-                                <td>
-                                    <button class="btn btn-sm btn-primary">Edit</button>
-                                    <button class="btn btn-sm btn-danger">Delete</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>';
+                            </tr>';
+                        }
+                    
+                        echo '</tbody>
+                        </table>';
                 } elseif ($page == 'content') {
                     echo '<h2>Content Management</h2>
                     <div class="mt-4">
