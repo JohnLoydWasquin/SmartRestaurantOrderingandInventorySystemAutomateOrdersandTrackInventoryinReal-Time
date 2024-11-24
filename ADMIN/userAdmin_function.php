@@ -19,4 +19,18 @@ class UserAdminFunction{
         }
         return $users;
     }
+
+    public function updateUser($userId, $firstName, $email, $role) {
+        $query = "UPDATE users SET firstName = ?, email = ?, role = ? WHERE user_id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("sssi", $firstName, $email, $role, $userId);
+        return $stmt->execute();
+    }
+
+    public function deleteUser($userId) {
+        $query = "DELETE FROM users WHERE user_id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $userId);
+        return $stmt->execute();
+    }
 }

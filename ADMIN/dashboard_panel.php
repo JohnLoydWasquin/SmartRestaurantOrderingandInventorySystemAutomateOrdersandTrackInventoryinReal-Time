@@ -135,7 +135,7 @@
                                 <td>' . htmlspecialchars($user['role'] ?? 'User') . '</td>
                                 <td>
                                     <button class="btn btn-sm btn-primary">Edit</button>
-                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                    <button class="btn btn-sm btn-danger" onclick="deleteUser(' . htmlspecialchars($user['user_id']) . ')">Delete</button>
                                 </td>
                             </tr>';
                         }
