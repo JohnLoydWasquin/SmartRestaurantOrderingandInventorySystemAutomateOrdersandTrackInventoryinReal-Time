@@ -134,9 +134,15 @@
                                 <td>' . htmlspecialchars($user['email']) . '</td>
                                 <td>' . htmlspecialchars($user['role'] ?? 'User') . '</td>
                                 <td>
-                                    <button class="btn btn-sm btn-primary">Edit</button>
-                                    <button class="btn btn-sm btn-danger" onclick="deleteUser(' . htmlspecialchars($user['user_id']) . ')">Delete</button>
-                                </td>
+                        <button class="btn btn-sm btn-primary" 
+                            onclick="editUser(
+                                '. json_encode($user['user_id']) .', 
+                                '. json_encode($user['firstName']) .', 
+                                '. json_encode($user['email']) .', 
+                                '. json_encode($user['role'] ?? 'User') .')">Edit</button>
+                    <button class="btn btn-sm btn-danger" 
+                            onclick="deleteUser('. json_encode($user['user_id']) .')">Delete</button>
+                        </td>
                             </tr>';
                         }
                     
@@ -207,6 +213,18 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../ADMIN/admin.js"></script>
+    <script>
+        function editUser(userId, firstName, email, role) {
+            alert(`Edit User: ${userId}, Name: ${firstName}, Email: ${email}, Role: ${role}`);
+            // Open edit modal or navigate to edit page
+        }
+
+        function deleteUser(userId) {
+            if (confirm('Are you sure you want to delete this user?')) {
+                alert(`Delete User: ${userId}`);
+                // Call API to delete the user
+            }
+        }
+    </script>
 </body>
 </html>
