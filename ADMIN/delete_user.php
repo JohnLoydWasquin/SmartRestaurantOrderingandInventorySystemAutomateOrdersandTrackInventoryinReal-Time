@@ -1,21 +1,20 @@
 <?php
+session_start();
 require_once '../DATABASE/mainDB.php';
-require_once '../ADMIN/userAdmin_function.php';
 
-header('Content-Type: application/json');
+if(isset($_POST['user_id'])){
+    $userId = intval($_POST['user_id']);
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $data = json_decode(file_get_contents("php://input"), true);
-    $userId = $data['userId'];
+    $query = "DELETE FROM users WHERE user_id = ? ";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('i', $userId);
 
-    $userAdmin = new UserAdminFunction();
-    $result = $userAdmin->deleteUser($userId);
-
-    if ($result) {
-        echo json_encode(['success' => true, 'message' => 'User deleted successfully']);
-    } else {
-        echo json_encode(['success' => false, 'message' => 'Failed to delete user']);
+    if($stmt->execute()){
+        echo json_encode(['status' => 'success', 'message' => 'User deleted successfully']);
+    }else{
+        echo json_encode(['status' => 'error', 'message' => 'Error deleting user']);
     }
-} else {
-    echo json_encode(['success' => false, 'message' => 'Invalid request method']);
+
+    $stmt->close();
+    $conn->close();
 }
