@@ -2,11 +2,12 @@
 session_start();
 require_once '../DATABASE/mainDB.php';
 
+// Fetch side dishes from the database or provide a fallback
 try {
     $pdo = new PDO("mysql:host=localhost;dbname=samgyup_paradise", "root", "");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $stmt = $pdo->prepare("SELECT menu_id, menu_name, description, price, category, quantity FROM menus WHERE category = 'Beef'");
+    $stmt = $pdo->prepare("SELECT menu_id, menu_name, description, quantity FROM menus WHERE category = 'Side Dish'");
     $stmt->execute();
     $menu_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -14,79 +15,67 @@ try {
         $menu_items = [
             [
                 'menu_id' => 1,
-                'menu_name' => 'Beef Samgyup',
-                'description' => 'Thinly sliced beef.',
-                'price' => 199,
-                'category' => 'Beef',
-                'quantity' => 255
+                'menu_name' => 'Odeng-Fishcake',
+                'description' => 'Savory fish cakes.',
+                'category' => 'Side Dish',
+                'quantity' => 100
             ],
             [
                 'menu_id' => 2,
-                'menu_name' => 'Yangnyum Beef',
-                'description' => 'Marinated beef slices coated in a sweet and savory sauce.',
-                'price' => 549,
-                'category' => 'Beef',
-                'quantity' => 255
+                'menu_name' => 'Onion-Sauce',
+                'description' => 'A sweet condiment.',
+                'category' => 'Side Dish',
+                'quantity' => 100
             ],
             [
                 'menu_id' => 3,
-                'menu_name' => 'Bulgogi',
-                'description' => 'Thin & tender slices of beef marinated in a sweet soy-based sauce.',
-                'price' => 549,
-                'category' => 'Beef',
-                'quantity' => 255
+                'menu_name' => 'Kimchi',
+                'description' => 'Spicy, tangy, fermented fun.',
+                'category' => 'Side Dish',
+                'quantity' => 100
             ],
             [
                 'menu_id' => 4,
-                'menu_name' => 'Beef Enoki',
-                'description' => 'Thinly sliced beef and enoki mushrooms wrapped together.',
-                'price' => 499,
-                'category' => 'Beef',
-                'quantity' => 255
-            ]
+                'menu_name' => 'Japchae',
+                'description' => 'A vibrant stir-fried noodle.',
+                'category' => 'Side Dish',
+                'quantity' => 100
+            ],
+            [
+                'menu_id' => 5,
+                'menu_name' => 'Potato Marbles',
+                'description' => 'Sweet and savory potato.',
+                'category' => 'Side Dish',
+                'quantity' => 100
+            ],
+            [
+                'menu_id' => 6,
+                'menu_name' => 'Raddish Pickle',
+                'description' => 'A crisp radish pickled.',
+                'category' => 'Side Dish',
+                'quantity' => 100
+            ],
+            [
+                'menu_id' => 7,
+                'menu_name' => 'Pamuchim',
+                'description' => 'Thinly sliced green onions.',
+                'category' => 'Side Dish',
+                'quantity' => 100
+            ],
+            [
+                'menu_id' => 8,
+                'menu_name' => 'Water Spanich',
+                'description' => 'Blanched water spinach.',
+                'category' => 'Side Dish',
+                'quantity' => 100
+            ],
         ];
     }
 } catch (PDOException $e) {
-    $menu_items = [
-        [
-            'menu_id' => 1,
-            'menu_name' => 'Beef Samgyup',
-            'description' => 'Thinly sliced beef.',
-            'price' => 199,
-            'category' => 'Beef',
-            'quantity' => 255
-        ],
-        [
-            'menu_id' => 2,
-            'menu_name' => 'Yangnyum Beef',
-            'description' => 'Marinated beef slices coated in a sweet and savory sauce.',
-            'price' => 549,
-            'category' => 'Beef',
-            'quantity' => 255
-        ],
-        [
-            'menu_id' => 3,
-            'menu_name' => 'Bulgogi',
-            'description' => 'Thin & tender slices of beef marinated in a sweet soy-based sauce.',
-            'price' => 549,
-            'category' => 'Beef',
-            'quantity' => 255
-        ],
-        [
-            'menu_id' => 4,
-            'menu_name' => 'Beef Enoki',
-            'description' => 'Thinly sliced beef and enoki mushrooms wrapped together.',
-            'price' => 499,
-            'category' => 'Beef',
-            'quantity' => 255
-        ]
-    ];
     error_log("Database connection failed: " . $e->getMessage());
+    $menu_items = [];
 }
 
-if (!isset($_SESSION['total_cost'])) {
-    $_SESSION['total_cost'] = 0;
-}
 ?>
 
 <!DOCTYPE html>
@@ -94,10 +83,10 @@ if (!isset($_SESSION['total_cost'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="../MAIN/style.css">
     <link rel="icon" type="image/x-icon" href="../websiteImage/LogoFP.webp">
-    <title>Beef Menu - Samgyup Paradise</title>
+    <title>Side Dishes - Samgyup Paradise</title>
 </head>
 <body>
 <header>
@@ -202,23 +191,22 @@ if (!isset($_SESSION['total_cost'])) {
                 </ul>
             </div>
         </div>
-    </header>
+</header>
 
 <div class="menu-section" id="menu">
     <h1>UNLI <span>SAMGYUPSAL</span> MENU</h1>
     <div class="menu-category">
-        <span class="category-label">BEEF MENU</span>
+        <span class="category-label">SIDE DISHES</span>
     </div>
     <div class="menu-items">
         <?php foreach ($menu_items as $item): ?>
             <div class="menu-item">
-                <img src="../websiteImage/beefmenu<?php echo $item['menu_id']; ?>.png" alt="<?php echo htmlspecialchars($item['menu_name']); ?>">
+            <img src="../websiteImage/sideDishes<?php echo $item['menu_id']; ?>.png" alt="<?php echo htmlspecialchars($item['menu_name']); ?>">
                 <h3><?php echo htmlspecialchars($item['menu_name']); ?></h3>
                 <p><?php echo htmlspecialchars($item['description']); ?></p>
-                <form action="../MENU/add_to_cart.php" method="POST">
+                <form action="../MENU/add_side_dish.php" method="POST">
                     <input type="hidden" name="menu_id" value="<?php echo htmlspecialchars($item['menu_id']); ?>">
                     <input type="hidden" name="menu_name" value="<?php echo htmlspecialchars($item['menu_name']); ?>">
-                    <input type="hidden" name="price" value="<?php echo htmlspecialchars($item['price']); ?>">
                     <label for="quantity_<?php echo $item['menu_id']; ?>">Quantity:</label>
                     <input 
                         type="number" 
@@ -228,15 +216,14 @@ if (!isset($_SESSION['total_cost'])) {
                         min="1" 
                         max="<?php echo htmlspecialchars($item['quantity']); ?>" 
                         value="1">
-                    <button type="submit" class="add-to-cart">Add To Cart</button>
-                    <span class="price">₱<?php echo number_format($item['price'], 2); ?></span>
+                    <button type="submit" class="add-to-cart">Add This Dish</button>
                 </form>
             </div>
         <?php endforeach; ?>
     </div>
     <div class="total-amount-btn">
         <a href="../MENU/cartTable.php" class="basket-btn" id="basket-total">
-            Basket <i>•</i> ₱<?php echo number_format($_SESSION['total_cost'], 2); ?>
+            View Basket <i class="fa-solid fa-arrow-right"></i>
         </a>
     </div>
 </div>

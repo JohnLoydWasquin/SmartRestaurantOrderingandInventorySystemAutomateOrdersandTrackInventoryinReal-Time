@@ -137,7 +137,7 @@ if (!isset($_SESSION['total_cost'])) {
                             <li><a href="../MENU/menu.php">Pork Menu</a></li>
                             <li><a href="../MENU/beefMenu.php">Beef Menu</a></li>
                             <li><a href="../MENU/chickenMenu.php">Chicken Menu</a></li>
-                            <li><a href="../MENU/sideDishes.html">Side Dishes</a></li>
+                            <li><a href="../MENU/sideDishes.php">Side Dishes</a></li>
                         </ul>
                         </li>
                         <a href="../MAIN/about.php">
@@ -167,7 +167,7 @@ if (!isset($_SESSION['total_cost'])) {
                             <li><a href="../MENU/menu.php">Pork Menu</a></li>
                             <li><a href="../MENU/beefMenu.php">Beef Menu</a></li>
                             <li><a href="../MENU/chickenMenu.php">Chicken Menu</a></li>
-                            <li><a href="../MENU/sideDishes.html">Side Dishes</a></li>
+                            <li><a href="../MENU/sideDishes.php">Side Dishes</a></li>
                         </ul>
                     </li>
                     <a href="../MAIN/about.php">
