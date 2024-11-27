@@ -34,10 +34,19 @@ class DashboardFunctions {
         return $result->fetch_assoc()['menu_name'];
     }
 
-    // Fetch pending orders
-    // public function getPendingOrders() {
-    //     $query = "SELECT COUNT(*) AS pendingOrders FROM Orders WHERE status = 'Pending'";
-    //     $result = $this->conn->query($query);
-    //     return $result->fetch_assoc()['pendingOrders'];
-    // }
+    // Fetch Loyal Customer
+    public function getLoyalty() {
+        $query = "SELECT u.firstName AS loyalCustomer, COUNT(m.menu_id) AS totalOrders
+        FROM users u
+        JOIN menusbenta m ON u.user_id = m.user_id
+        GROUP BY u.user_id
+        ORDER BY totalOrders DESC
+        LIMIT 1";
+        $result = $this->conn->query($query);
+        if ($result && $result->num_rows > 0) {
+            return $result->fetch_assoc()['loyalCustomer'];
+        } else {
+            return null; // No loyal customer found
+        }
+    }
 }

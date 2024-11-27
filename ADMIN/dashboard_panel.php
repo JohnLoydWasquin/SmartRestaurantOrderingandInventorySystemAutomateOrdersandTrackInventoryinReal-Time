@@ -61,7 +61,7 @@
                 </div>
             </div>
 
-            <!-- Main Content -->
+            <!-- MAIN -->
             <div class="col py-3 main-content">
                 <?php
                 // Dynamically load content based on 'page' parameter
@@ -76,6 +76,7 @@
                 $totalUsers = $dashboardFunctions->getTotalUsers();
                 $totalRevenue = $dashboardFunctions->getTotalRevenue();
                 $popularItem = $dashboardFunctions->getPopulatItem();
+                $loyalUser = $dashboardFunctions->getLoyalty();
                 $users = $userAdmin->getAllUsers();
                 // $pendingOrders = $dashboardFunctions->getPendingOrders();
                 if ($page == 'dashboard') {
@@ -108,8 +109,8 @@
                         <div class="col-md-3 mb-4">
                             <div class="card bg-warning text-white">
                                 <div class="card-body">
-                                    <h5 class="card-title">Pending Orders</h5>
-                                    <p class="card-text display-4">-</p>
+                                    <h5 class="card-title">Loyal Customer</h5>
+                                    <p class="card-text display-4">'. $loyalUser .'</p>
                                 </div>
                             </div>
                         </div>

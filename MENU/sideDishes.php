@@ -2,12 +2,11 @@
 session_start();
 require_once '../DATABASE/mainDB.php';
 
-// Fetch side dishes from the database or provide a fallback
 try {
     $pdo = new PDO("mysql:host=localhost;dbname=samgyup_paradise", "root", "");
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $stmt = $pdo->prepare("SELECT menu_id, menu_name, description, quantity FROM menus WHERE category = 'Side Dish'");
+    $stmt = $pdo->prepare("SELECT menu_id, menu_name, description, price, category, quantity FROM menus WHERE category = 'Side Dish'");
     $stmt->execute();
     $menu_items = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -68,14 +67,70 @@ try {
                 'description' => 'Blanched water spinach.',
                 'category' => 'Side Dish',
                 'quantity' => 100
-            ],
+            ]
         ];
     }
 } catch (PDOException $e) {
+    $menu_items = [
+        [
+            'menu_id' => 1,
+            'menu_name' => 'Odeng-Fishcake',
+            'description' => 'Savory fish cakes.',
+            'category' => 'Side Dish',
+            'quantity' => 100
+        ],
+        [
+            'menu_id' => 2,
+            'menu_name' => 'Onion-Sauce',
+            'description' => 'A sweet condiment.',
+            'category' => 'Side Dish',
+            'quantity' => 100
+        ],
+        [
+            'menu_id' => 3,
+            'menu_name' => 'Kimchi',
+            'description' => 'Spicy, tangy, fermented fun.',
+            'category' => 'Side Dish',
+            'quantity' => 100
+        ],
+        [
+            'menu_id' => 4,
+            'menu_name' => 'Japchae',
+            'description' => 'A vibrant stir-fried noodle.',
+            'category' => 'Side Dish',
+            'quantity' => 100
+        ],
+        [
+            'menu_id' => 5,
+            'menu_name' => 'Potato Marbles',
+            'description' => 'Sweet and savory potato.',
+            'category' => 'Side Dish',
+            'quantity' => 100
+        ],
+        [
+            'menu_id' => 6,
+            'menu_name' => 'Raddish Pickle',
+            'description' => 'A crisp radish pickled.',
+            'category' => 'Side Dish',
+            'quantity' => 100
+        ],
+        [
+            'menu_id' => 7,
+            'menu_name' => 'Pamuchim',
+            'description' => 'Thinly sliced green onions.',
+            'category' => 'Side Dish',
+            'quantity' => 100
+        ],
+        [
+            'menu_id' => 8,
+            'menu_name' => 'Water Spanich',
+            'description' => 'Blanched water spinach.',
+            'category' => 'Side Dish',
+            'quantity' => 100
+        ]
+    ];
     error_log("Database connection failed: " . $e->getMessage());
-    $menu_items = [];
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -86,7 +141,7 @@ try {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="../MAIN/style.css">
     <link rel="icon" type="image/x-icon" href="../websiteImage/LogoFP.webp">
-    <title>Side Dishes - Samgyup Paradise</title>
+    <title>Chicken Menu - Samgyup Paradise</title>
 </head>
 <body>
 <header>
@@ -169,7 +224,7 @@ try {
             </div>
             <div class="account">
                 <ul>
-                    <a href="../MAIN/main.html">
+                    <a href="main.html">
                         <li>
                             <i class="fa-solid fa-house-chimney"></i>
                         </li>
@@ -201,10 +256,10 @@ try {
     <div class="menu-items">
         <?php foreach ($menu_items as $item): ?>
             <div class="menu-item">
-            <img src="../websiteImage/sideDishes<?php echo $item['menu_id']; ?>.png" alt="<?php echo htmlspecialchars($item['menu_name']); ?>">
+                <img src="../websiteImage/sideDishes<?php echo $item['menu_id']; ?>.png" alt="<?php echo htmlspecialchars($item['menu_name']); ?>">
                 <h3><?php echo htmlspecialchars($item['menu_name']); ?></h3>
                 <p><?php echo htmlspecialchars($item['description']); ?></p>
-                <form action="../MENU/add_side_dish.php" method="POST">
+                <form action="../MENU/add_to_cart.php" method="POST">
                     <input type="hidden" name="menu_id" value="<?php echo htmlspecialchars($item['menu_id']); ?>">
                     <input type="hidden" name="menu_name" value="<?php echo htmlspecialchars($item['menu_name']); ?>">
                     <label for="quantity_<?php echo $item['menu_id']; ?>">Quantity:</label>
@@ -216,15 +271,13 @@ try {
                         min="1" 
                         max="<?php echo htmlspecialchars($item['quantity']); ?>" 
                         value="1">
-                    <button type="submit" class="add-to-cart">Add This Dish</button>
+                    <button type="submit" class="add-to-cart">Add To Basket</button>
                 </form>
             </div>
         <?php endforeach; ?>
     </div>
     <div class="total-amount-btn">
-        <a href="../MENU/cartTable.php" class="basket-btn" id="basket-total">
-            View Basket <i class="fa-solid fa-arrow-right"></i>
-        </a>
+        <a href="../MENU/cartTable.php" class="basket-btn" id="basket-total">Add This Dish</a>
     </div>
 </div>
 <script src="../MAIN/main.js"></script>
