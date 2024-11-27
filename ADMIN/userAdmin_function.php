@@ -24,13 +24,19 @@ class UserAdminFunction{
         $query = "UPDATE users SET firstName = ?, email = ?, role = ? WHERE user_id = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bind_param("sssi", $firstName, $email, $role, $userId);
-        return $stmt->execute();
+        if (!$stmt->execute()) {
+            throw new Exception("Error updating user: " . $stmt->error);
+        }
+        return true;
     }
 
     public function deleteUser($userId) {
         $query = "DELETE FROM users WHERE user_id = ?";
         $stmt = $this->conn->prepare($query);
         $stmt->bind_param("i", $userId);
-        return $stmt->execute();
+        if (!$stmt->execute()) {
+            throw new Exception("Error deleting user: " . $stmt->error);
+        }
+        return true;
     }
 }
