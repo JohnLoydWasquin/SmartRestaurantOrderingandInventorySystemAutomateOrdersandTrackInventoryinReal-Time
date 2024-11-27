@@ -73,12 +73,16 @@
                 $dashboardFunctions = new DashboardFunctions();
                 $userAdmin = new UserAdminFunction();
 
+                // DASHBOARD OVERVIEW
                 $totalUsers = $dashboardFunctions->getTotalUsers();
                 $totalRevenue = $dashboardFunctions->getTotalRevenue();
                 $popularItem = $dashboardFunctions->getPopulatItem();
                 $loyalUser = $dashboardFunctions->getLoyalty();
+
+                // USERS
                 $users = $userAdmin->getAllUsers();
-                // $pendingOrders = $dashboardFunctions->getPendingOrders();
+                // $updateUser = $userAdmin->updateUser($userId, $firstName, $email, $role);
+                // $deleteUser = $userAdmin->deleteUser($userId);
                 if ($page == 'dashboard') {
                     echo '<h2>Dashboard Overview</h2>
                     <div class="row mt-4">
@@ -136,13 +140,13 @@
                                 <td>' . htmlspecialchars($user['role'] ?? 'User') . '</td>
                                 <td>
                         <button class="btn btn-sm btn-primary" 
-                            onclick="editUser(
-                                '. json_encode($user['user_id']) .', 
-                                '. json_encode($user['firstName']) .', 
-                                '. json_encode($user['email']) .', 
-                                '. json_encode($user['role'] ?? 'User') .')">Edit</button>
+                            onclick="openEditModal(
+                                \''. htmlspecialchars($user['user_id']) .'\',
+                                \''. addslashes($user['firstName']) .'\',
+                                \''. addslashes($user['email']) .'\',
+                                \''. ($user['role'] ?? 'User') .'\')">Edit</button>
                     <button class="btn btn-sm btn-danger" 
-                            onclick="deleteUser('. json_encode($user['user_id']) .')">Delete</button>
+                            onclick="deleteUser(\''. htmlspecialchars($user['user_id']) .'\')">Delete</button>
                         </td>
                             </tr>';
                         }
@@ -213,19 +217,59 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Edit User Modal -->
+    <div class="modal" id="editUserModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="editUserForm" method="POST" action="update_delete.php">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="user_id" id="editUserId">
+                    <div class="mb-3">
+                        <label for="editFirstName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="editFirstName" name="firstName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="editEmail" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editRole" class="form-label">Role</label>
+                        <select class="form-select" id="editRole" name="role" required>
+                            <option value="Admin">Admin</option>
+                            <option value="User">User</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" name="action" value="update" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function editUser(userId, firstName, email, role) {
-            alert(`Edit User: ${userId}, Name: ${firstName}, Email: ${email}, Role: ${role}`);
-            // Open edit modal or navigate to edit page
+        function openEditModal(userId, firstName, email, role) {
+            document.getElementById('editUserId').value = userId;
+            document.getElementById('editFirstName').value = firstName;
+            document.getElementById('editEmail').value = email;
+            document.getElementById('editRole').value = role;
+
+            new bootstrap.Modal(document.getElementById('editUserModal')).show();
         }
 
         function deleteUser(userId) {
             if (confirm('Are you sure you want to delete this user?')) {
-                alert(`Delete User: ${userId}`);
-                // Call API to delete the user
+                alert(`Deleting user with ID: ${userId}`);
             }
         }
     </script>
+    <script src="bootStrapModal.js"></script>
 </body>
 </html>
