@@ -8,18 +8,20 @@ function openEditModal(userId, firstName, email, role) {
 
 function deleteUser(userId) {
     if (confirm('Are you sure you want to delete this user?')) {
+        const formData = new FormData();
+        formData.append('action', 'delete');
+        formData.append('user_id', userId);
+
         fetch('../ADMIN/update_delete.php', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: JSON.stringify({ action: 'delete', user_id: userId }),
-        }).then(response => {
-            if (response.ok) {
-                location.reload();
-            } else {
-                alert('Error deleting user.');
-            }
-        });
+            body: formData
+        })
+        .then(response => response.text())
+        .then(result => {
+            alert(result);
+            location.reload(); // Reload the page after successful deletion
+        })
+        .catch(error => console.error('Error:', error));
     }
 }
+

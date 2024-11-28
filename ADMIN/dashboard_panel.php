@@ -48,8 +48,8 @@
                             </a>
                         </li>
                         <li>
-                            <a href="?page=content" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-file-earmark-text"></i> <span class="ms-1 d-none d-sm-inline">Content</span>
+                            <a href="?page=inventory" class="nav-link px-0 align-middle">
+                                <i class="bi bi-box"></i> <span class="ms-1 d-none d-sm-inline">Inventory</span>
                             </a>
                         </li>
                         <li>
@@ -153,42 +153,44 @@
                     
                         echo '</tbody>
                         </table>';
-                } elseif ($page == 'content') {
-                    echo '<h2>Content Management</h2>
+                } elseif ($page == 'inventory') {
+                    echo '<h2>Inventory Management</h2>
                     <div class="mt-4">
-                        <button class="btn btn-success mb-3">Add New Post</button>
+                        <button class="btn btn-success mb-3 onclick="openAddItemModal()">Add New Item</button>
                         <table class="table table-striped">
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Title</th>
-                                    <th>Author</th>
-                                    <th>Date</th>
+                                    <th>Item Name</th>
+                                    <th>Category</th>
+                                    <th>Stock</th>
+                                    <th>Price</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Welcome to Our Website</td>
-                                    <td>Admin</td>
-                                    <td>2023-06-01</td>
+                            <tbody>';
+                            $inventoryItems = [
+                                ['id' => 1, 'name' => 'Beef Samgyup', 'category' => 'Beef', 'stock' => 50, 'price' => 500],
+                                ['id' => 2, 'name' => 'Pork Samgyup', 'category' => 'Pork', 'stock' => 40, 'price' => 400],
+                            ];
+                            foreach ($inventoryItems as $item) {
+                                echo '<tr>
+                                    <td>' . htmlspecialchars($item['id']) . '</td>
+                                    <td>' . htmlspecialchars($item['name']) . '</td>
+                                    <td>' . htmlspecialchars($item['category']) . '</td>
+                                    <td>' . htmlspecialchars($item['stock']) . '</td>
+                                    <td>₱' . number_format($item['price'], 2) . '</td>
                                     <td>
-                                        <button class="btn btn-sm btn-primary">Edit</button>
+                                        <button class="btn btn-sm btn-primary" onclick="openInventoryModal(\''. htmlspecialchars($item['id']) .'\',
+                                            \''. addslashes($item['name']) .'\',
+                                            \''. addslashes($item['category']) .'\',
+                                            \''. addslashes($item['stock']) .'\',
+                                            <td>₱' . number_format($item['price'], 2) . '</td>)">Edit</button>
                                         <button class="btn btn-sm btn-danger">Delete</button>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>New Features Announcement</td>
-                                    <td>John Doe</td>
-                                    <td>2023-06-15</td>
-                                    <td>
-                                        <button class="btn btn-sm btn-primary">Edit</button>
-                                        <button class="btn btn-sm btn-danger">Delete</button>
-                                    </td>
-                                </tr>
-                            </tbody>
+                                </tr>';
+                            }
+                            echo '</tbody>
                         </table>
                     </div>';
                 } elseif ($page == 'settings') {
@@ -217,11 +219,11 @@
         </div>
     </div>
 
-    <!-- Edit User Modal -->
+    <!-- Edit/Delete User Modal -->
     <div class="modal" id="editUserModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form id="editUserForm" method="POST" action="update_delete.php">
+            <form id="editUserForm" method="POST" action="../ADMIN/update_delete.php">
                 <div class="modal-header">
                     <h5 class="modal-title">Edit User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -253,7 +255,95 @@
     </div>
 </div>
 
+<!-- Inventory Modal -->
+<div class="modal" id="editInventoryModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="editInventoryForm" method="POST" action="../ADMIN/inventory_function.php">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Inventory Item</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="item_id" id="editItemId">
+                    <div class="mb-3">
+                        <label for="editItemName" class="form-label">Item Name</label>
+                        <input type="text" class="form-control" id="editItemName" name="item_name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editCategory" class="form-label">Category</label>
+                        <input type="text" class="form-control" id="editCategory" name="category" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editStock" class="form-label">Stock</label>
+                        <input type="number" class="form-control" id="editStock" name="stock" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editPrice" class="form-label">Price</label>
+                        <input type="number" step="0.01" class="form-control" id="editPrice" name="price" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" name="action" value="update" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Add Item Modal -->
+<div class="modal" id="addItemModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="addItemForm" method="POST" action="../ADMIN/inventory_function.php">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Item</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="addItemName" class="form-label">Item Name</label>
+                        <input type="text" class="form-control" id="addItemName" name="item_name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="addCategory" class="form-label">Category</label>
+                        <input type="text" class="form-control" id="addCategory" name="category" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="addStock" class="form-label">Stock</label>
+                        <input type="number" class="form-control" id="addStock" name="stock" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="addPrice" class="form-label">Price</label>
+                        <input type="number" step="0.01" class="form-control" id="addPrice" name="price" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" name="action" value="add" class="btn btn-success">Add Item</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function openAddItemModal(id, name, category, stock, price) {
+    // Assign values to modal inputs
+    document.getElementById('itemId').value = id;
+    document.getElementById('itemName').value = name;
+    document.getElementById('itemCategory').value = category;
+    document.getElementById('itemStock').value = stock;
+    document.getElementById('itemPrice').value = price;
+
+    // Show modal
+    new bootstrap.Modal(document.getElementById('addItemModal')).show();
+}
+
+</script>
+
     <script>
         function openEditModal(userId, firstName, email, role) {
             document.getElementById('editUserId').value = userId;
@@ -270,6 +360,8 @@
             }
         }
     </script>
+
     <script src="bootStrapModal.js"></script>
+    <script src="inventoryModal.js"></script>
 </body>
 </html>
