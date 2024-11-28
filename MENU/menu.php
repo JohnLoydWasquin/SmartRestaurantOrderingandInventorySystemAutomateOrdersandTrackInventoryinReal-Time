@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'mainDB.php';
+require_once '../DATABASE/mainDB.php';
 
 try {
     $pdo = new PDO("mysql:host=localhost;dbname=samgyup_paradise", "root", "");
@@ -16,7 +16,7 @@ try {
                 'menu_id' => 1,
                 'menu_name' => 'Dae-Pae',
                 'description' => 'Thinly sliced, flavorful pork belly strips.',
-                'price' => 549,
+                'price' => 199,
                 'category' => 'Pork',
                 'quantity' => 255
             ],
@@ -76,7 +76,7 @@ try {
             'menu_id' => 1,
             'menu_name' => 'Dae-Pae',
             'description' => 'Thinly sliced, flavorful pork belly strips.',
-            'price' => 549,
+            'price' => 199,
             'category' => 'Pork',
             'quantity' => 255
         ],
@@ -143,17 +143,17 @@ if (!isset($_SESSION['total_cost'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="icon" type="image/x-icon" href="websiteImage/LogoFP.webp">
+    <link rel="stylesheet" type="text/css" href="../MAIN/style.css">
+    <link rel="icon" type="image/x-icon" href="../websiteImage/LogoFP.webp">
     <title>Unlimited menu - Samgyup Paradise</title>
 </head>
 <body>
-    <header>
+<header>
         <div class="header">
             <div class="headerbar">
                 <div class="account">
                     <ul>
-                        <a href="main.html">
+                        <a href="../MAIN/main.html">
                             <li>
                                 <i class="fa-solid fa-house-chimney"></i>
                             </li>
@@ -167,7 +167,7 @@ if (!isset($_SESSION['total_cost'])) {
                             <input type="search" placeholder="Search...">
                             <i class="fa-solid fa-magnifying-glass srchicon"></i>
                         </div>
-                        <a href="login.html">
+                        <a href="../LOGIN/login.html">
                             <li>
                                 <i class="fa-solid fa-user" id="user-mb"></i>
                             </li>
@@ -176,22 +176,22 @@ if (!isset($_SESSION['total_cost'])) {
                 </div>
                 <div class="nav">
                     <ul>
-                        <a href="main.html">
+                        <a href="../MAIN/main.html">
                             <li>Home</li>
                         </a>
                         <li>
-                        <a href="menu.php">Menu</a>
+                        <a href="#">Menu</a>
                         <ul class="dropdown">
-                            <li><a href="#">Pork Menu</a></li>
-                            <li><a href="#">Beef Menu</a></li>
-                            <li><a href="#">Chicken Menu</a></li>
-                            <li><a href="#">Side Dishes</a></li>
+                            <li><a href="../MENU/menu.php">Pork Menu</a></li>
+                            <li><a href="../MENU/beefMenu.php">Beef Menu</a></li>
+                            <li><a href="../MENU/chickenMenu.php">Chicken Menu</a></li>
+                            <li><a href="../MENU/sideDishes.php">Side Dishes</a></li>
                         </ul>
                         </li>
-                        <a href="about.php">
+                        <a href="../MAIN/about.php">
                             <li>About</li>
                         </a>
-                        <a href="bTable.php">
+                        <a href="../MAIN/bTable.php">
                             <li>Book Table</li>
                         </a>
                     </ul>
@@ -206,29 +206,29 @@ if (!isset($_SESSION['total_cost'])) {
             </div>
             <div class="nav">
                 <ul>
-                    <a href="main.html">
+                    <a href="../MAIN/main.html">
                         <li>Home</li>
                     </a>
                     <li>
-                        <a href="menu.php">Menu</a>
+                        <a href="#">Menu</a>
                         <ul class="dropdown">
-                            <li><a href="menu.php">Pork Menu</a></li>
-                            <li><a href="beefMenu.php">Beef Menu</a></li>
-                            <li><a href="chickenMenu.html">Chicken Menu</a></li>
-                            <li><a href="sideDishes.html">Side Dishes</a></li>
+                            <li><a href="../MENU/menu.php">Pork Menu</a></li>
+                            <li><a href="../MENU/beefMenu.php">Beef Menu</a></li>
+                            <li><a href="../MENU/chickenMenu.php">Chicken Menu</a></li>
+                            <li><a href="../MENU/sideDishes.php">Side Dishes</a></li>
                         </ul>
                     </li>
-                    <a href="about.php">
+                    <a href="../MAIN/about.php">
                         <li>About</li>
                     </a>
-                    <a href="bTable.php">
+                    <a href="../MAIN/bTable.php">
                         <li>Book Table</li>
                     </a>
                 </ul>
             </div>
             <div class="account">
                 <ul>
-                    <a href="main.html">
+                    <a href="../MAIN/main.html">
                         <li>
                             <i class="fa-solid fa-house-chimney"></i>
                         </li>
@@ -242,7 +242,7 @@ if (!isset($_SESSION['total_cost'])) {
                         <input type="search" placeholder="Search...">
                         <i class="fa-solid fa-magnifying-glass srchicon"></i>
                     </div>
-                    <a href="login.html">
+                    <a href="../LOGIN/login.html">
                         <li>
                             <i class="fa-solid fa-user" id="user-lap"></i>
                         </li>
@@ -250,42 +250,53 @@ if (!isset($_SESSION['total_cost'])) {
                 </ul>
             </div>
         </div>
-    </header> 
+</header> 
 
-    <div class="menu-section" id="menu">
-        <h1>UNLI <span>SAMGYUPSAL</span> MENU</h1>
-        <div class="menu-category">
-        <span class="category-label">PORK MENU</span>
-        </div>
-        <div class="menu-items">
-        <?php foreach ($menu_items as $item): ?>
-            <div class="menu-item">
-            <img src="websiteImage/porkmenu<?php echo $item['menu_id']; ?>.png" alt="<?php echo htmlspecialchars($item['menu_name']); ?>">
-                <h3><?php echo htmlspecialchars($item['menu_name']); ?></h3>
-                <p><?php echo htmlspecialchars($item['description']); ?></p>
-                <form action="add_to_cart.php" method="POST" id="menus">
-                    <input type="hidden" name="menu_id" value="<?php echo htmlspecialchars($item['menu_id']); ?>">
-                    <input type="hidden" name="menu_name" value="<?php echo htmlspecialchars($item['menu_name']); ?>">
-                    <input type="hidden" name="price" value="<?php echo htmlspecialchars($item['price']); ?>">
-                    <input type="hidden" name="description" value="<?php echo htmlspecialchars($item['description']); ?>">
-                    <input type="hidden" name="category" value="<?php echo htmlspecialchars($item['category']); ?>">
-                    <input type="hidden" name="quantity" value="<?php echo htmlspecialchars($item['quantity']); ?>">
-                    <button type="submit" class="add-to-cart">Add To Cart</button>
-                    <span class="price">₱<?php echo number_format($item['price'], 2); ?></span>
-                </form>
-            </div>
-            <?php endforeach; ?>
-        </div>
-        <div class="total-amount-btn">
-        <button class="basket-btn" id="basket-total">Basket <i>•</i> ₱<?php echo number_format($_SESSION['total_cost'] ?? 0, 2); ?></button>
-        </div>
+<div class="menu-section" id="menu">
+    <h1>UNLI <span>SAMGYUPSAL</span> MENU</h1>
+    <div class="menu-category">
+    <span class="category-label">PORK MENU</span>
     </div>
-    <script src="main.js"></script>
+    <div class="menu-items">
+    <?php foreach ($menu_items as $item): ?>
+        <div class="menu-item">
+        <img src="../websiteImage/porkmenu<?php echo $item['menu_id']; ?>.png" alt="<?php echo htmlspecialchars($item['menu_name']); ?>">
+            <h3><?php echo htmlspecialchars($item['menu_name']); ?></h3>
+            <p><?php echo htmlspecialchars($item['description']); ?></p>
+            <form action="../MENU/add_to_cart.php" method="POST" id="menus">
+                <input type="hidden" name="menu_id" value="<?php echo htmlspecialchars($item['menu_id']); ?>">
+                <input type="hidden" name="menu_name" value="<?php echo htmlspecialchars($item['menu_name']); ?>">
+                <input type="hidden" name="price" value="<?php echo htmlspecialchars($item['price']); ?>">
+                <input type="hidden" name="description" value="<?php echo htmlspecialchars($item['description']); ?>">
+                <input type="hidden" name="category" value="<?php echo htmlspecialchars($item['category']); ?>">
+                <input type="hidden" name="menu_type" value="<?php echo htmlspecialchars($menu_type); ?>">
+                <label for="quantity_<?php echo htmlspecialchars($item['menu_id']); ?>">Quantity:</label>
+                <input 
+                    type="number" 
+                    id="quantity_<?php echo htmlspecialchars($item['menu_id']); ?>" 
+                    name="quantity" 
+                    class="quantity-input" 
+                    min="1" 
+                    max="<?php echo htmlspecialchars($item['quantity']); ?>" 
+                    value="1">
+                <button type="submit" class="add-to-cart">Add To Cart</button>
+                <span class="price">₱<?php echo number_format($item['price'], 2); ?></span>
+            </form>
+        </div>
+        <?php endforeach; ?>
+    </div>
+    <div class="total-amount-btn">
+    <a href="../MENU/cartTable.php" class="basket-btn" id="basket-total">
+    Basket <i>•</i> ₱<?php echo number_format($_SESSION['total_cost'] ?? 0, 2); ?>
+    </a>
+    </div>
+</div>
+    <script src="../MAIN/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-function addToCart(menu_id, menu_name, price, quantity = 1) {
+    function addToCart(menu_id, menu_name, price, quantity = 1) {
     $.ajax({
-        url: 'add_to_cart.php',
+        url: '../MENU/add_to_cart.php',
         type: 'POST',
         data: {
             menu_id: menu_id,
@@ -295,7 +306,11 @@ function addToCart(menu_id, menu_name, price, quantity = 1) {
         },
         success: function(response) {
             const data = JSON.parse(response);
+<<<<<<< HEAD:menu.php
 
+=======
+            
+>>>>>>> 5936ebf6b100a55cd626a39d05c5814e5fcfa411:MENU/menu.php
             if (data.total_cost) {
                 document.getElementById("basket-total").innerText = `Total: $${data.total_cost}`;
             }
