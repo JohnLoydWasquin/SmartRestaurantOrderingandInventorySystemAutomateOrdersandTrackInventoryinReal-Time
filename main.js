@@ -33,7 +33,6 @@ cross.addEventListener('click', function(){
 })
 let currentIndex = 0;
 
-        // Function to move carousel slide
         function moveSlide(step) {
             const slides = document.querySelectorAll('.carousel-images img');
             const totalSlides = slides.length;
@@ -42,11 +41,9 @@ let currentIndex = 0;
             document.querySelector('.carousel-images').style.transform = 'translateX(' + newTransformValue + ')';
         }
 
-        // Auto-slide functionality
         setInterval(() => {
             moveSlide(1);
-        }, 3000); // Change slide every 3 seconds
-// JavaScript to trigger the 'loaded' class after the page is fully loaded
+        }, 3000); 
         window.addEventListener('load', function() {
             const backgroundSection = document.querySelector('.background-section');
             backgroundSection.classList.add('loaded');
