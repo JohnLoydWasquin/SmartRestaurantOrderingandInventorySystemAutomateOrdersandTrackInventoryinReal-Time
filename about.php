@@ -112,13 +112,11 @@
             </div>
         </div>
     </header>
-          <!-- background-section  -->
     <div class="background-section ">
         <div class="text-container">
             <h1>ABOUT US.</h1>
         </div>
     </div>
-    <!-- Our Story Section -->
     <div class="our-story">
         <h2>Our Story</h2>
         <p>Three university students—Johnloyd, Paul, and Julie—decided to use their skills in technology and business to create a website promoting local restaurants. Their first client was **Samgyup Paradise**, a Korean BBQ spot they loved. After discussing the idea with the owner, Hana, they built a website that highlighted the restaurant's story and mission.
@@ -138,7 +136,6 @@
         <div class="our-story">
         <p>More than just a restaurant, Samgyup Paradise has become a beloved gathering place for friends, families, and food lovers alike. Whether you're celebrating a special occasion or simply enjoying a night out with loved ones, our welcoming atmosphere and commitment to excellence ensure that every visit is an unforgettable experience. As we continue to grow, we remain dedicated to upholding the values of quality, authenticity, and community that have made us a favorite destination for those seeking not just a meal, but a celebration of food, culture, and togetherness.</p>
     </div>
-    <!-- Zoom-In Images Below Carousel -->
     <div class="zoom-images">
             <img src="websiteImage/599.jpg" alt="Image 1">
             <img src="websiteImage/kfood4.jpg" alt="Image 2">
@@ -146,7 +143,6 @@
             <img src="websiteImage/kfood2.jpg" alt="Image 4">
         </div>
     </div>
-     <!-- Mechanics Section -->
      <div class="mechanics">
         <h2>Samgyup Paradise Promo Mechanics</h2>
         <ul>
@@ -160,7 +156,6 @@
             <li>8. This promo is valid for one person per promo.</li>
         </ul>
     </div>
-    <!-- Customer Reviews -->
     <div class="reviews">
         <h2>What Our Customers Say</h2>
         <div class="review">
@@ -176,16 +171,11 @@
             <span class="customer">- Mark Lee</span>
         </div>
     </div>
-       
-    <!-- Centered Button Section with Link -->
     <a href="menu.php">
         <button class="red_btn">
         <i class="fa fa-arrow-right"></i> View Menu
         </button>
-
     </a>
-
-    <!-- Footer -->
     <footer>
         <p>&copy; 2024 Samgyup Paradise | <a href="privacy-policy.html">Privacy Policy</a> | <a href="contact.html">Contact Us</a></p>
     </footer>
