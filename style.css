@@ -542,4 +542,244 @@
         width: 70vw;
     }
 }
+/*--------------AboutCSS---------------*/
+   /* Background Image Section */
+    .background-section {
+        position: relative;
+        width: 100%;
+        height: 400px; /* Adjust the height as needed */
+        background-image: url('websiteImage/Aboutbg.jpg'); /* Your background image */
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    /* Text Container */
+    .text-container {
+        text-align: center;
+        color: white; /* Set text color to white */
+        opacity: 0; /* Initially, the text will be hidden */
+        transform: translateY(30px); /* Move the text slightly down initially */
+        clip-path: inset(0 0 100% 0); /* Start by clipping the text (hidden) */
+        transition: opacity 1s ease, transform 1s ease, clip-path 1s ease; /* Smooth transition */
+    }
+
+    /* Reveal the text after the transition (once page is loaded) */
+    .background-section.loaded .text-container {
+        opacity: 1; /* Fade in the text */
+        transform: translateY(0); /* Bring the text to its normal position */
+        clip-path: inset(0 0 0 0); /* Reveal the text fully */
+    }
+
+    /* Optional: Text Style */
+    .text-container h1 {
+        font-size: 9rem; /* Adjust text size */
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Apply a class to trigger the transition */
+    body.loaded .background-section .text-container {
+        opacity: 1; /* Final state with full opacity */
+        transform: translateY(0); /* Final position */
+        clip-path: inset(0 0 0 0); /* Reveal the text */
+    }
+
+    /* Carousel Styles */
+    .carousel {
+        position: relative;
+        width: 50%;  /* Set the width of the carousel to 50% */
+        margin: 0 auto;  /* Centers the carousel */
+        overflow: hidden;
+        border-radius: 10px;
+        margin-top: 40px;
+    }
+    
+    .carousel-images {
+        display: flex;
+        transition: transform 1s ease-in-out;
+        width: 100%;
+    }
+    
+    .carousel-images img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+    
+    .prev, .next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        font-size: 2rem;
+        padding: 10px;
+        cursor: pointer;
+        border: none;
+        border-radius: 50%;
+    }
+    
+    .prev {
+        left: 10px;
+    }
+    
+    .next {
+        right: 10px;
+    }
+
+    .prev {
+        left: 10px;
+    }
+
+    .next {
+        right: 10px;
+    }
+
+    .zoom-images {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 40px;
+    }
+
+    .zoom-images img {
+        width: 22%;
+        transition: transform 0.3s ease-in-out;
+        cursor: pointer;
+        border-radius: 10px;
+    }
+
+    .zoom-images img:hover {
+        transform: scale(1.1);
+    }
+
+    /* Mechanics Section */
+    .mechanics {
+        background-color: #f1f1f1;
+        padding: 40px 20px;
+        text-align: center; /* Center the heading */
+    }
+
+    .mechanics h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    /* Center the list and justify text inside */
+    .mechanics ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0 auto;
+        max-width: 800px;  /* Control the width for better readability */
+        text-align: justify; /* Justify the text in the list items */
+    }
+
+    .mechanics li {
+        font-size: 1.2rem;
+        margin: 10px 0;
+        color: #555;
+        line-height: 1.6;  /* Better line spacing */
+    }
+
+
+    /* Our Story Section */
+    .our-story {
+        padding: 40px 20px;
+        background-color: #ffffff;
+        text-align: center;
+    }
+
+    .our-story h2 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+
+    .our-story p {
+        font-size: 1.2rem;
+        color: #555;
+        line-height: 1.6;
+    }
+
+    /* Customer Reviews */
+    .reviews {
+        background-color: #f9f9f9;
+        padding: 40px 0;
+        text-align: center;
+    }
+
+    .reviews h2 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+
+    .review {
+        margin: 20px auto;
+        max-width: 600px;
+    }
+
+    .review p { 
+        font-size: 1rem;
+        color: #555;
+        margin-bottom: 10px;
+    }
+
+    .review .customer {
+        font-weight: bold;
+        font-size: 1.1rem;
+    }
+
+    /* Footer */
+    footer {
+        background-color: #333;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+    }
+
+    footer a {
+        color: white;
+        text-decoration: none;
+        margin: 0 10px;
+    }
+   /* Button Section */
+    .red_btn {
+        cursor: pointer;
+        margin: 20px auto; /* This centers the button horizontally */
+        width: 160px;
+        font-weight: bold;
+        color: aliceblue;
+        line-height: 50px;
+        background-color: rgb(253, 77, 8);
+        border-radius: 5px;
+        border: 1px solid rgb(253, 77, 8);
+        box-shadow: 0 10px 15px rgb(250, 120, 69);
+        transition: all 0.2s;
+        display: flex; /* Use flexbox to center the content inside the button */
+        justify-content: center; /* Center the content horizontally inside the button */
+        align-items: center; /* Center the content vertically inside the button */
+        text-align: center; /* Ensure text is centered in case of long text */
+    }
+
+    /* Button Icon Styles */
+    .red_btn i {
+        color: white;
+        transition: all 0.2s;
+        margin-right: 5px; /* Optional: Space between icon and text */
+    }
+
+    /* Hover effect for the button */
+    .red_btn:hover {
+        background-color: white;
+        box-shadow: 0 2px 15px rgb(250, 120, 69);
+        border: 1px solid rgb(253, 77, 8);
+        color: rgb(253, 77, 8);
+    }
+
+    /* Hover effect for the button icon */
+    .red_btn:hover i {
+        color: rgb(253, 77, 8);
+    }
 

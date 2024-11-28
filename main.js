@@ -31,3 +31,23 @@ cross.addEventListener('click', function(){
     cross.style.display = 'none';
     headerbar.style.right = '-100%';
 })
+let currentIndex = 0;
+
+        // Function to move carousel slide
+        function moveSlide(step) {
+            const slides = document.querySelectorAll('.carousel-images img');
+            const totalSlides = slides.length;
+            currentIndex = (currentIndex + step + totalSlides) % totalSlides;
+            const newTransformValue = -100 * currentIndex + '%';
+            document.querySelector('.carousel-images').style.transform = 'translateX(' + newTransformValue + ')';
+        }
+
+        // Auto-slide functionality
+        setInterval(() => {
+            moveSlide(1);
+        }, 3000); // Change slide every 3 seconds
+// JavaScript to trigger the 'loaded' class after the page is fully loaded
+        window.addEventListener('load', function() {
+            const backgroundSection = document.querySelector('.background-section');
+            backgroundSection.classList.add('loaded');
+        });
