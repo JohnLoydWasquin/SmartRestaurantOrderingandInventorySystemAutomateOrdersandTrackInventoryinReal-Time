@@ -635,7 +635,6 @@
         clip-path: inset(0 0 100% 0); 
         transition: opacity 1s ease, transform 1s ease, clip-path 1s ease; 
     }
-<<<<<<< HEAD
 
     .background-section.loaded .text-container {
         opacity: 1; 
@@ -644,43 +643,23 @@
     }
 
 
-=======
-    .background-section.loaded .text-container {
-        opacity: 1; 
-        transform: translateY(0); 
-        clip-path: inset(0 0 0 0); 
-    }
-
-  
->>>>>>> 9c6f0c20ad156563ef1b127e4641f2aa075db1f3
     .text-container h1 {
         font-size: 9rem; 
         margin: 0;
         padding: 0;
     }
 
-<<<<<<< HEAD
     
     body.loaded .background-section .text-container {
         opacity: 1; 
         transform: translateY(0); 
         clip-path: inset(0 0 0 0); /
-=======
-    body.loaded .background-section .text-container {
-        opacity: 1; 
-        transform: translateY(0); 
-        clip-path: inset(0 0 0 0); 
->>>>>>> 9c6f0c20ad156563ef1b127e4641f2aa075db1f3
     }
 
     .carousel {
         position: relative;
         width: 50%;  
-<<<<<<< HEAD
         margin: 0 auto; 
-=======
-        margin: 0 auto;  
->>>>>>> 9c6f0c20ad156563ef1b127e4641f2aa075db1f3
         overflow: hidden;
         border-radius: 10px;
         margin-top: 40px;
@@ -744,10 +723,7 @@
         transform: scale(1.1);
     }
 
-<<<<<<< HEAD
    
-=======
->>>>>>> 9c6f0c20ad156563ef1b127e4641f2aa075db1f3
     .mechanics {
         background-color: #f1f1f1;
         padding: 40px 20px;
@@ -764,28 +740,18 @@
         padding: 0;
         margin: 0 auto;
         max-width: 800px;  
-<<<<<<< HEAD
         text-align: justify;
     }
-=======
-        text-align: justify; 
->>>>>>> 9c6f0c20ad156563ef1b127e4641f2aa075db1f3
 
     .mechanics li {
         font-size: 1.2rem;
         margin: 10px 0;
         color: #555;
-<<<<<<< HEAD
         line-height: 1.6; 
     }
 
 
 
-=======
-        line-height: 1.6;  
-    }
-
->>>>>>> 9c6f0c20ad156563ef1b127e4641f2aa075db1f3
     .our-story {
         padding: 40px 20px;
         background-color: #ffffff;
@@ -803,10 +769,7 @@
         line-height: 1.6;
     }
 
-<<<<<<< HEAD
     
-=======
->>>>>>> 9c6f0c20ad156563ef1b127e4641f2aa075db1f3
     .reviews {
         background-color: #f9f9f9;
         padding: 40px 0;
@@ -834,10 +797,7 @@
         font-size: 1.1rem;
     }
 
-<<<<<<< HEAD
    
-=======
->>>>>>> 9c6f0c20ad156563ef1b127e4641f2aa075db1f3
     footer {
         background-color: #333;
         color: white;
@@ -850,11 +810,7 @@
         text-decoration: none;
         margin: 0 10px;
     }
-<<<<<<< HEAD
   
-=======
-        
->>>>>>> 9c6f0c20ad156563ef1b127e4641f2aa075db1f3
     .red_btn {
         cursor: pointer;
         margin: 20px auto; 
@@ -873,20 +829,13 @@
         text-align: center; 
     }
 
-<<<<<<< HEAD
-=======
-  
->>>>>>> 9c6f0c20ad156563ef1b127e4641f2aa075db1f3
     .red_btn i {
         color: white;
         transition: all 0.2s;
         margin-right: 5px; 
     }
-<<<<<<< HEAD
 
  
-=======
->>>>>>> 9c6f0c20ad156563ef1b127e4641f2aa075db1f3
     .red_btn:hover {
         background-color: white;
         box-shadow: 0 2px 15px rgb(250, 120, 69);

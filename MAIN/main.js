@@ -31,7 +31,6 @@ cross.addEventListener('click', function(){
     cross.style.display = 'none';
     headerbar.style.right = '-100%';
 })
-<<<<<<< HEAD:main.js
 let currentIndex = 0;
 
         function moveSlide(step) {
@@ -49,5 +48,3 @@ let currentIndex = 0;
             const backgroundSection = document.querySelector('.background-section');
             backgroundSection.classList.add('loaded');
         });
-=======
->>>>>>> origin/main:MAIN/main.js
