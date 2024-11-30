@@ -1,4 +1,4 @@
-function openInventoryModal(id, name, category, stock, price) {
+function openEditInventoryModal(id, name, category, stock, price) {
     document.getElementById('editItemId').value = id;
     document.getElementById('editItemName').value = name;
     document.getElementById('editCategory').value = category;

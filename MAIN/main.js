@@ -32,4 +32,3 @@ cross.addEventListener('click', function(){
     headerbar.style.right = '-100%';
 })
 let currentIndex = 0;
-
