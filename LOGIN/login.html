@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="../LOGIN/login.css">
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <!-- SweetAlert2 JS --> 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Register & Login - Samgyup Paradise</title>
+</head>
+<body>
+    <div class="back">
+        <a href="../MAIN/main.html"><i class="fa-sharp fa-solid fa-circle-arrow-left"></i></a>
+    </div>
+    <div class="container" id="signUp" style="display: none;">
+        <h1 class="form-title">Create Accounts</h1>
+        <form method="post" action="../LOGIN/login.php">
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" name="fName" id="fName" placeholder="First Name" required>
+                <label for="fName">First Name</label>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" name="lName" id="lName" placeholder="Last Name" required>
+                <label for="lName">Last Name</label>
+            </div>
+            <div class="input-group">
+                <i class="fa-solid fa-phone"></i>
+                <input type="number" name="tNumber" id="tNumber" placeholder="Phone" required>
+                <label for="tNumber">Phone No.</label>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="text" name="email" id="email" placeholder="Email" required>
+                <label for="email">Email</label>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="password" id="password" placeholder="Password" required>
+                <label for="password">Password</label>
+            </div>
+                <input type="submit" class="btn" value="Sign Up" name="signUp">
+                <p class="or">
+                    ----------Or----------
+                </p>
+                <div class="icons">
+                    <i class="fab fa-google"></i>
+                    <i class="fab fa-facebook"></i>
+                </div>
+                <div class="links">
+                    <p>Already Have Accounts?</p>
+                    <button id="signInButton">Sign In</button>
+                </div>
+        </form>
+    </div>
+
+    <div class="container" id="signIn">
+        <h1 class="form-title">Welcome back</h1>
+        <form method="post" action="../LOGIN/login.php">
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="text" name="email" id="email" placeholder="Email" required>
+                <label for="email">Email</label>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" name="password" id="password" placeholder="Password" required>
+                <label for="password">Password</label>
+            </div>
+            <p class="recover">
+                <a href="#">Recover Password</a>
+            </p>
+                <input type="submit" class="btn" value="Sign In" name="signIn">
+                <p class="or">
+                    ----------Or----------
+                </p>
+                <div class="icons">
+                    <i class="fab fa-google"></i>
+                    <i class="fab fa-facebook"></i>
+                </div>
+                <div class="links">
+                    <p>Don't Have Accounts Yet?</p>
+                    <button id="signUpButton">Sign Up</button>
+                </div>
+        </form>
+    </div>
+    <script src="../LOGIN/login.js"></script>
+</body>
+</html>
