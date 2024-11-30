@@ -69,9 +69,11 @@
 
                 require_once '../ADMIN/dashboard_function.php';
                 require_once '../ADMIN/userAdmin_function.php';
+                require_once '../ADMIN/inventoryManager.php';
 
                 $dashboardFunctions = new DashboardFunctions();
                 $userAdmin = new UserAdminFunction();
+                $inventoryItems = new InventoryManager();
 
                 // DASHBOARD OVERVIEW
                 $totalUsers = $dashboardFunctions->getTotalUsers();
@@ -81,8 +83,9 @@
 
                 // USERS
                 $users = $userAdmin->getAllUsers();
-                // $updateUser = $userAdmin->updateUser($userId, $firstName, $email, $role);
-                // $deleteUser = $userAdmin->deleteUser($userId);
+
+                // INVENTORY
+                $items = $inventoryItems->getAllItems();
                 if ($page == 'dashboard') {
                     echo '<h2>Dashboard Overview</h2>
                     <div class="row mt-4">
@@ -169,11 +172,7 @@
                                 </tr>
                             </thead>
                             <tbody>';
-                            $inventoryItems = [
-                                ['id' => 1, 'name' => 'Beef Samgyup', 'category' => 'Beef', 'stock' => 50, 'price' => 500],
-                                ['id' => 2, 'name' => 'Pork Samgyup', 'category' => 'Pork', 'stock' => 40, 'price' => 400],
-                            ];
-                            foreach ($inventoryItems as $item) {
+                            foreach ($items as $item) {
                                 echo '<tr>
                                     <td>' . htmlspecialchars($item['id']) . '</td>
                                     <td>' . htmlspecialchars($item['name']) . '</td>
@@ -181,12 +180,13 @@
                                     <td>' . htmlspecialchars($item['stock']) . '</td>
                                     <td>₱' . number_format($item['price'], 2) . '</td>
                                     <td>
-                                        <button class="btn btn-sm btn-primary" onclick="openInventoryModal(\''. htmlspecialchars($item['id']) .'\',
+                                        <button class="btn btn-sm btn-primary" onclick="openEditInventoryModal(
+                                            \''. htmlspecialchars($item['id']) .'\',
                                             \''. addslashes($item['name']) .'\',
                                             \''. addslashes($item['category']) .'\',
                                             \''. addslashes($item['stock']) .'\',
-                                            <td>₱' . number_format($item['price'], 2) . '</td>)">Edit</button>
-                                        <button class="btn btn-sm btn-danger">Delete</button>
+                                            \''. htmlspecialchars($item['price']) .'\')">Edit</button>
+                                        <button class="btn btn-sm btn-danger" >Delete</button>
                                     </td>
                                 </tr>';
                             }
@@ -255,113 +255,46 @@
     </div>
 </div>
 
-<!-- Inventory Modal -->
+    <!-- Edit Inventory Modal -->
 <div class="modal" id="editInventoryModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form id="editInventoryForm" method="POST" action="../ADMIN/inventory_function.php">
-                <div class="modal-header">
-                    <h5 class="modal-title">Edit Inventory Item</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div class="modal-dialog">
+    <div class="modal-content">
+        <form id="editInventoryForm" method="POST" action="../ADMIN/inventory_function.php">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit Inventory Item</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" name="item_id" id="editItemId">
+                <div class="mb-3">
+                    <label for="editItemName" class="form-label">Item Name</label>
+                    <input type="text" class="form-control" id="editItemName" name="item_name" required>
                 </div>
-                <div class="modal-body">
-                    <input type="hidden" name="item_id" id="editItemId">
-                    <div class="mb-3">
-                        <label for="editItemName" class="form-label">Item Name</label>
-                        <input type="text" class="form-control" id="editItemName" name="item_name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editCategory" class="form-label">Category</label>
-                        <input type="text" class="form-control" id="editCategory" name="category" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editStock" class="form-label">Stock</label>
-                        <input type="number" class="form-control" id="editStock" name="stock" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editPrice" class="form-label">Price</label>
-                        <input type="number" step="0.01" class="form-control" id="editPrice" name="price" required>
-                    </div>
+                <div class="mb-3">
+                    <label for="editCategory" class="form-label">Category</label>
+                    <input type="text" class="form-control" id="editCategory" name="category" required>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" name="action" value="update" class="btn btn-primary">Save Changes</button>
+                <div class="mb-3">
+                    <label for="editStock" class="form-label">Stock</label>
+                    <input type="number" class="form-control" id="editStock" name="stock" required>
                 </div>
-            </form>
-        </div>
+                <div class="mb-3">
+                    <label for="editPrice" class="form-label">Price</label>
+                    <input type="number" step="0.01" class="form-control" id="editPrice" name="price" required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="submit" name="action" value="update" class="btn btn-primary">Save Changes</button>
+            </div>
+        </form>
     </div>
 </div>
-
-<!-- Add Item Modal -->
-<div class="modal" id="addItemModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form id="addItemForm" method="POST" action="../ADMIN/inventory_function.php">
-                <div class="modal-header">
-                    <h5 class="modal-title">Add New Item</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="addItemName" class="form-label">Item Name</label>
-                        <input type="text" class="form-control" id="addItemName" name="item_name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="addCategory" class="form-label">Category</label>
-                        <input type="text" class="form-control" id="addCategory" name="category" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="addStock" class="form-label">Stock</label>
-                        <input type="number" class="form-control" id="addStock" name="stock" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="addPrice" class="form-label">Price</label>
-                        <input type="number" step="0.01" class="form-control" id="addPrice" name="price" required>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" name="action" value="add" class="btn btn-success">Add Item</button>
-                </div>
-            </form>
-        </div>
-    </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-    function openAddItemModal(id, name, category, stock, price) {
-    // Assign values to modal inputs
-    document.getElementById('itemId').value = id;
-    document.getElementById('itemName').value = name;
-    document.getElementById('itemCategory').value = category;
-    document.getElementById('itemStock').value = stock;
-    document.getElementById('itemPrice').value = price;
 
-    // Show modal
-    new bootstrap.Modal(document.getElementById('addItemModal')).show();
-}
-
-</script>
-
-    <script>
-        function openEditModal(userId, firstName, email, role) {
-            document.getElementById('editUserId').value = userId;
-            document.getElementById('editFirstName').value = firstName;
-            document.getElementById('editEmail').value = email;
-            document.getElementById('editRole').value = role;
-
-            new bootstrap.Modal(document.getElementById('editUserModal')).show();
-        }
-
-        function deleteUser(userId) {
-            if (confirm('Are you sure you want to delete this user?')) {
-                alert(`Deleting user with ID: ${userId}`);
-            }
-        }
-    </script>
-
-    <script src="bootStrapModal.js"></script>
-    <script src="inventoryModal.js"></script>
+    <script src="../ADMIN/bootStrapModal.js"></script>
+    <script src="../ADMIN/inventoryModal.js"></script>
 </body>
 </html>
