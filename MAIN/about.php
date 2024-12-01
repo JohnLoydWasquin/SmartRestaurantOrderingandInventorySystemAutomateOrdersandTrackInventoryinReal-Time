@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="icon" type="image/x-icon" href="websiteImage/LogoFP.webp">
+    <link rel="stylesheet" type="text/css" href="../MAIN/style.css">
+    <link rel="icon" type="image/x-icon" href="../websiteImage/LogoFP.webp">
     <title>About Us - Samgyup Paradise</title>
 </head>
 <body>
@@ -14,7 +14,7 @@
             <div class="headerbar">
                 <div class="account">
                     <ul>
-                        <a href="main.html">
+                        <a href="../MAIN/main.html">
                             <li>
                                 <i class="fa-solid fa-house-chimney"></i>
                             </li>
@@ -28,7 +28,7 @@
                             <input type="search" placeholder="Search...">
                             <i class="fa-solid fa-magnifying-glass srchicon"></i>
                         </div>
-                        <a href="login.html">
+                        <a href="../LOGIN/login.html">
                             <li>
                                 <i class="fa-solid fa-user" id="user-mb"></i>
                             </li>
@@ -37,22 +37,22 @@
                 </div>
                 <div class="nav">
                     <ul>
-                        <a href="main.html">
+                        <a href="../MAIN/main.html">
                             <li>Home</li>
                         </a>
                         <li>
                         <a href="#">Menu</a>
                         <ul class="dropdown">
-                            <li><a href="#">Pork Menu</a></li>
-                            <li><a href="#">Beef Menu</a></li>
-                            <li><a href="#">Chicken Menu</a></li>
-                            <li><a href="#">Side Dishes</a></li>
+                            <li><a href="../MENU/menu.php">Pork Menu</a></li>
+                            <li><a href="../MENU/beefMenu.php">Beef Menu</a></li>
+                            <li><a href="../MENU/chickenMenu.php">Chicken Menu</a></li>
+                            <li><a href="../MENU/sideDishes.php">Side Dishes</a></li>
                         </ul>
                         </li>
-                        <a href="about.php">
+                        <a href="../MAIN/about.php">
                             <li>About</li>
                         </a>
-                        <a href="bTable.php">
+                        <a href="../MAIN/bTable.php">
                             <li>Book Table</li>
                         </a>
                     </ul>
@@ -67,29 +67,29 @@
             </div>
             <div class="nav">
                 <ul>
-                    <a href="main.html">
+                    <a href="../MAIN/main.html">
                         <li>Home</li>
                     </a>
                     <li>
                         <a href="#">Menu</a>
                         <ul class="dropdown">
-                            <li><a href="menu.php">Pork Menu</a></li>
-                            <li><a href="beefMenu.html">Beef Menu</a></li>
-                            <li><a href="chickenMenu.html">Chicken Menu</a></li>
-                            <li><a href="sideDishes.html">Side Dishes</a></li>
+                            <li><a href="../MENU/menu.php">Pork Menu</a></li>
+                            <li><a href="../MENU/beefMenu.php">Beef Menu</a></li>
+                            <li><a href="../MENU/chickenMenu.php">Chicken Menu</a></li>
+                            <li><a href="../MENU/sideDishes.php">Side Dishes</a></li>
                         </ul>
                     </li>
-                    <a href="about.php">
+                    <a href="../MAIN/about.php">
                         <li>About</li>
                     </a>
-                    <a href="bTable.php">
+                    <a href="../MAIN/bTable.php">
                         <li>Book Table</li>
                     </a>
                 </ul>
             </div>
             <div class="account">
                 <ul>
-                    <a href="main.html">
+                    <a href="../MAIN/main.html">
                         <li>
                             <i class="fa-solid fa-house-chimney"></i>
                         </li>
@@ -103,7 +103,7 @@
                         <input type="search" placeholder="Search...">
                         <i class="fa-solid fa-magnifying-glass srchicon"></i>
                     </div>
-                    <a href="login.html">
+                    <a href="../LOGIN/login.html">
                         <li>
                             <i class="fa-solid fa-user" id="user-lap"></i>
                         </li>
@@ -128,9 +128,9 @@
       
          <div class="carousel">
             <div class="carousel-images">
-                <img src="websiteImage/Lifestyle-Photo-2.jpg" alt="Restaurant Image 1">
-                <img src="websiteImage/Lifestyle-Photo-4.jpg" alt="Restaurant Image 2">
-                <img src="websiteImage/Delicious-Future.jpg" alt="Restaurant Image 3">
+                <img src="../websiteImage/Lifestyle-Photo-2.jpg" alt="Restaurant Image 1">
+                <img src="../websiteImage/Lifestyle-Photo-4.jpg" alt="Restaurant Image 2">
+                <img src="../websiteImage/Delicious-Future.jpg" alt="Restaurant Image 3">
             </div>
             <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
             <button class="next" onclick="moveSlide(1)">&#10095;</button>
@@ -140,10 +140,10 @@
     </div>
  
     <div class="zoom-images">
-            <img src="websiteImage/599.jpg" alt="Image 1">
-            <img src="websiteImage/kfood4.jpg" alt="Image 2">
-            <img src="websiteImage/kfood3.jpg" alt="Image 3">
-            <img src="websiteImage/kfood2.jpg" alt="Image 4">
+            <img src="../websiteImage/599.jpg" alt="Image 1">
+            <img src="../websiteImage/kfood4.jpg" alt="Image 2">
+            <img src="../websiteImage/kfood3.jpg" alt="Image 3">
+            <img src="../websiteImage/kfood2.jpg" alt="Image 4">
         </div>
     </div>
 
@@ -178,7 +178,7 @@
     </div>
        
  
-    <a href="menu.php">
+    <a href="../MENU/menu.php">
         <button class="red_btn">
         <i class="fa fa-arrow-right"></i> View Menu
         </button>
@@ -191,5 +191,5 @@
     
 </body>
 
-<script src="main.js"></script>
+<script src="../MAIN/main.js"></script>
 </html>

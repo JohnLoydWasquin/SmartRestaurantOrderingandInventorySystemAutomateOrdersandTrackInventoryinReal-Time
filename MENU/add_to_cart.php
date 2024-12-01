@@ -10,10 +10,29 @@ class Cart {
     }
 
     public function addToCart($menu_id, $menu_name, $price, $quantity = 1) {
+        $conn = $this->db->getConnection();
+    
+        // Check stock availability
+        $checkStockQuery = "SELECT stock FROM inventory WHERE id = ?";
+        $stmt = $conn->prepare($checkStockQuery);
+        $stmt->bind_param("i", $menu_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $menu = $result->fetch_assoc();
+    
+        if (!$menu) {
+            return "Item not found in inventory.";
+        }
+    
+        if ($menu['stock'] < $quantity) {
+            return "Insufficient stock for this item.";
+        }
+    
+        // Add to session cart
         if (!isset($_SESSION['cart']) || !is_array($_SESSION['cart'])) {
             $_SESSION['cart'] = [];
         }
-
+    
         $found = false;
         foreach ($_SESSION['cart'] as &$item) {
             if ($item['menu_id'] == $menu_id) {
@@ -22,7 +41,7 @@ class Cart {
                 break;
             }
         }
-
+    
         if (!$found) {
             $_SESSION['cart'][] = [
                 'menu_id' => $menu_id,
@@ -31,9 +50,20 @@ class Cart {
                 'quantity' => $quantity,
             ];
         }
-
-        return $this->calculateTotalCost();
+    
+        // Deduct stock from the database
+        $newStock = $menu['stock'] - $quantity;
+        $updateStockQuery = "UPDATE inventory SET stock = ? WHERE id = ?";
+        $updateStmt = $conn->prepare($updateStockQuery);
+        $updateStmt->bind_param("ii", $newStock, $menu_id);
+    
+        if ($updateStmt->execute()) {
+            return $this->calculateTotalCost();
+        } else {
+            return "Failed to update stock.";
+        }
     }
+    
 
     public function calculateTotalCost() {
         $total_cost = 0;

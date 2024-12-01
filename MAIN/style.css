@@ -619,7 +619,7 @@
     position: relative;
     width: 100%;
     height: 400px; 
-    background-image: url('websiteImage/Aboutbg.jpg'); 
+    background-image: url('../websiteImage/Aboutbg.jpg'); 
     background-size: cover;
     background-position: center;
     display: flex;
