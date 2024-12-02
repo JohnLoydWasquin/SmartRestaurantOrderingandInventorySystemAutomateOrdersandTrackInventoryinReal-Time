@@ -51,4 +51,14 @@ class InventoryManager {
     //     }
     //     return false; // Item not found
     // }
+
+    public function deleteItems($id) {
+        $query = "DELETE FROM inventory WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $id);
+        if (!$stmt->execute()) {
+            throw new Exception("Error deleting item: " . $stmt->error);
+        }
+        return true;
+    }
 }
