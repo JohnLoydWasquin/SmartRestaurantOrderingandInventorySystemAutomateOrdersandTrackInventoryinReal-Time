@@ -306,11 +306,6 @@ if (!isset($_SESSION['total_cost'])) {
         },
         success: function(response) {
             const data = JSON.parse(response);
-<<<<<<< HEAD:menu.php
-
-=======
-            
->>>>>>> 5936ebf6b100a55cd626a39d05c5814e5fcfa411:MENU/menu.php
             if (data.total_cost) {
                 document.getElementById("basket-total").innerText = `Total: $${data.total_cost}`;
             }

@@ -44,34 +44,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $userId = $_POST['user_id'];
 
         if (empty($userId)) {
-            echo "<script>alert('Error: user_id is missing.');</script>";
+            echo json_encode(['status' => 'error', 'message' => 'Error: user_id is missing.']);
             exit;
         }
 
         if ($userAdmin->deleteUser($userId)) {
-            echo "
-            <!DOCTYPE html>
-            <html lang='en'>
-            <head>
-                <meta charset='UTF-8'>
-                <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-                <title>SweetAlert</title>
-                <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
-            </head>
-                <script>
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Deleted!',
-                    text: 'User has been deleted successfully.',
-                    confirmButtonText: 'OK'
-                }).then(() => {
-                    window.location.href = '../ADMIN/update_delete.php?page=users';
-                });
-                </script>
-                </body>
-                </html>";
+            echo json_encode(['status' => 'success', 'message' => 'User has been deleted successfully.']);
         } else {
-            echo "<script>alert('Error deleting user.');</script>";
+            echo json_encode(['status' => 'error', 'message' => 'Error deleting user.']);
         }
     }
 }
