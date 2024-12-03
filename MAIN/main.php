@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    require_once '../DATABASE/mainDB.php';
+    require_once '../LOGIN/login.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +19,7 @@
             <div class="headerbar">
                 <div class="account">
                     <ul>
-                        <a href="../MAIN/main.html">
+                        <a href="../MAIN/main.php">
                             <li>
                                 <i class="fa-solid fa-house-chimney"></i>
                             </li>
@@ -37,7 +42,7 @@
                 </div>
                 <div class="nav">
                     <ul>
-                        <a href="../MAIN/main.html">
+                        <a href="../MAIN/main.php">
                             <li>Home</li>
                         </a>
                         <li>
@@ -57,7 +62,6 @@
                         </a>
                     </ul>
                 </div>
-                <?php include 'menu.php'; ?>
             </div>
             <div class="logo">
                 <h2>SAMGYUP PARADISE</h2>
@@ -66,10 +70,9 @@
                 <i class="fa-solid fa-bars"></i>
                 <i class="fa-solid fa-xmark" id="hdcross"></i>
             </div>
-            <?php include 'menu.php'; ?>
             <div class="nav">
                 <ul>
-                    <a href="../MAIN/main.html">
+                    <a href="../MAIN/main.php">
                         <li>Home</li>
                     </a>
                     <li>
@@ -91,7 +94,7 @@
             </div>
             <div class="account">
                 <ul>
-                    <a href="../MAIN/main.html">
+                    <a href="../MAIN/main.php">
                         <li>
                             <i class="fa-solid fa-house-chimney"></i>
                         </li>
@@ -105,11 +108,25 @@
                         <input type="search" placeholder="Search...">
                         <i class="fa-solid fa-magnifying-glass srchicon"></i>
                     </div>
-                    <a href="../LOGIN/login.html">
-                        <li>
-                            <i class="fa-solid fa-user" id="user-lap"></i>
-                        </li>
-                    </a>
+                    <li class="dropdown-user">
+                                <a href="../LOGIN/login.html"><i class="fa-solid fa-user"></i></a>
+                        <ul class="dropdown">
+                            <li class="user-info">
+                            <img src="<?php echo isset($_SESSION['profilePicture']) && !empty($_SESSION['profilePicture']) 
+                            ? '../websiteImage/' . $_SESSION['profilePicture'] 
+                            : 'websiteImage/default.png'; ?>" 
+                            alt="Profile Picture" 
+                            class="profile-picture">
+                                <?php if (isset($_SESSION['fullName'])): ?>
+                                <span id="dropdownUserName" class="user-name"><a href="../MAIN/profile.html"><?php echo htmlspecialchars($_SESSION['fullName']); ?></a></span>
+                                <?php else: ?>
+                                    <a href="../LOGIN/login.html">Login</a>
+                                <?php endif; ?>
+                            </li>
+                            <li><a href="../MAIN/profile.php">Profile</a></li>
+                            <li><a href="../LOGIN/logout.php">Log Out</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
