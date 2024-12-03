@@ -51,14 +51,16 @@ class User {
             $row = $result->fetch_assoc();
             $_SESSION['email'] = $row['email'];
             $_SESSION['firstName'] = $row['firstName'];
-            $_SESSION['user_id'] = $row['user_id']; // Assuming 'id' is the user ID column
-            return true;
+            $_SESSION['lastName'] = $row['lastName'];
+            $_SESSION['fullName'] = $row['firstName'] . ' ' . $row['lastName']; // Combine first and last name
+            $_SESSION['user_id'] = $row['user_id'];
+            $_SESSION['profilePicture'] = !empty($row['profile_picture']) ? $row['profile_picture'] : 'websiteImage/default.png'; // Set a default if none exists // Assuming 'user_id' is the user ID column
+            return true; // Login successful
         } else {
-            return false;
+            return false; // Login failed
         }
-    }
+    }    
 }
-
 
 $db = new Database();
 $user = new User($db);
@@ -85,7 +87,7 @@ if (isset($_POST['signIn'])) {
     $password = $_POST['password'];
 
     if ($user->login($email, $password)) {
-        header("Location: ../MAIN/main.html");
+        header("Location: ../MAIN/main.php");
         exit();
     } else {
         echo "
@@ -112,6 +114,6 @@ if (isset($_POST['signIn'])) {
         </script>
         </body>
         </html>";
-    }
+    }    
 }
 ?>
