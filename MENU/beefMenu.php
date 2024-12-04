@@ -242,7 +242,17 @@ if (!isset($_SESSION['total_cost'])) {
                         min="1" 
                         max="<?php echo htmlspecialchars($item['quantity']); ?>" 
                         value="1">
-                    <button type="submit" class="add-to-cart">Add To Cart</button>
+                        <button 
+                            type="button" 
+                            class="add-to-cart" 
+                            onclick="addToCart(
+                                <?php echo htmlspecialchars($item['menu_id']); ?>, 
+                                '<?php echo addslashes($item['menu_name']); ?>', 
+                                <?php echo htmlspecialchars($item['price']); ?>, 
+                                document.getElementById('quantity_<?php echo htmlspecialchars($item['menu_id']); ?>').value
+                            )">
+                            Add To Cart
+                        </button>
                     <span class="price">₱<?php echo number_format($item['price'], 2); ?></span>
                 </form>
             </div>
@@ -255,5 +265,29 @@ if (!isset($_SESSION['total_cost'])) {
     </div>
 </div>
 <script src="../MAIN/main.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    function addToCart(menu_id, menu_name, price, quantity = 1) {
+    $.ajax({
+        url: '../MENU/add_to_cart.php',
+        type: 'POST',
+        data: {
+            menu_id: menu_id,
+            menu_name: menu_name,
+            price: price,
+            quantity: quantity
+        },
+        success: function(response) {
+            const data = JSON.parse(response);
+            if (data.total_cost) {
+                document.getElementById("basket-total").innerText = `Total: ₱${data.total_cost}`;
+            }
+        },
+        error: function() {
+            alert("There was an error adding the item to the cart.");
+        }
+    });
+}
+</script>
 </body>
 </html>
