@@ -293,7 +293,17 @@ if (!isset($_SESSION['total_cost'])) {
                     min="1" 
                     max="<?php echo htmlspecialchars($item['quantity']); ?>" 
                     value="1">
-                <button type="submit" class="add-to-cart">Add To Cart</button>
+                    <button 
+                            type="button" 
+                            class="add-to-cart" 
+                            onclick="addToCart(
+                                <?php echo htmlspecialchars($item['menu_id']); ?>, 
+                                '<?php echo addslashes($item['menu_name']); ?>', 
+                                <?php echo htmlspecialchars($item['price']); ?>, 
+                                document.getElementById('quantity_<?php echo htmlspecialchars($item['menu_id']); ?>').value
+                            )">
+                            Add To Cart
+                        </button>
                 <span class="price">₱<?php echo number_format($item['price'], 2); ?></span>
             </form>
         </div>
@@ -321,7 +331,7 @@ if (!isset($_SESSION['total_cost'])) {
         success: function(response) {
             const data = JSON.parse(response);
             if (data.total_cost) {
-                document.getElementById("basket-total").innerText = `Total: $${data.total_cost}`;
+                document.getElementById("basket-total").innerText = `Total: ₱${data.total_cost}`;
             }
         },
         error: function() {
@@ -330,6 +340,5 @@ if (!isset($_SESSION['total_cost'])) {
     });
 }
 </script>
-
 </body>
 </html>
