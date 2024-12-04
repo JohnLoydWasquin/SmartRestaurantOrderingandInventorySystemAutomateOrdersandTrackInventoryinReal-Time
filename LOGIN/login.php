@@ -54,6 +54,7 @@ class User {
             $_SESSION['lastName'] = $row['lastName'];
             $_SESSION['fullName'] = $row['firstName'] . ' ' . $row['lastName']; // Combine first and last name
             $_SESSION['user_id'] = $row['user_id'];
+            $_SESSION['PhoneNumber'] = $row['PhoneNumber'];
             $_SESSION['profilePicture'] = !empty($row['profile_picture']) ? $row['profile_picture'] : 'websiteImage/default.png'; // Set a default if none exists // Assuming 'user_id' is the user ID column
             return true; // Login successful
         } else {
