@@ -20,7 +20,7 @@ require_once '../MAIN/update_profile.php';
             <div class="headerbar">
                 <div class="account">
                     <ul>
-                        <a href="../MAIN/main.html">
+                        <a href="../MAIN/main.php">
                             <li>
                                 <i class="fa-solid fa-house-chimney"></i>
                             </li>
@@ -43,7 +43,7 @@ require_once '../MAIN/update_profile.php';
                 </div>
                 <div class="nav">
                     <ul>
-                        <a href="../MAIN/main.html">
+                        <a href="../MAIN/main.php">
                             <li>Home</li>
                         </a>
                         <li>
@@ -73,7 +73,7 @@ require_once '../MAIN/update_profile.php';
             </div>
             <div class="nav">
                 <ul>
-                    <a href="../MAIN/main.html">
+                    <a href="../MAIN/main.php">
                         <li>Home</li>
                     </a>
                     <li>
@@ -95,7 +95,7 @@ require_once '../MAIN/update_profile.php';
             </div>
             <div class="account">
                 <ul>
-                    <a href="../MAIN/main.html">
+                    <a href="../MAIN/main.php">
                         <li>
                             <i class="fa-solid fa-house-chimney"></i>
                         </li>

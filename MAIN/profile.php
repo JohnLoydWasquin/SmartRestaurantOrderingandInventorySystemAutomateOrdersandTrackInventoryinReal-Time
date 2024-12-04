@@ -152,8 +152,7 @@ require_once '../MAIN/update_profile.php';
                     </div>
                     <div class="profile-info">
                         <p><i class="fas fa-envelope"></i> <?php echo isset($_SESSION['email']) ? $_SESSION['email'] : 'Not available'; ?></p>
-                        <p><i class="fas fa-phone"></i> <?php echo isset($_SESSION['phone']) ? $_SESSION['phone'] : 'Not available'; ?></p>
-                        <p><i class="fas fa-calendar"></i> Member since: <?php echo isset($_SESSION['joinDate']) ? date('F Y', strtotime($_SESSION['joinDate'])) : 'Not available'; ?></p>
+                        <p><i class="fas fa-phone"></i> <?php echo isset($_SESSION['PhoneNumber']) ? $_SESSION['PhoneNumber'] : 'Not available'; ?></p>
                         <button class="edit-btn" onclick="toggleEditForm()">
                             <i class="fas fa-edit"></i> Edit Profile
                         </button>
@@ -199,56 +198,49 @@ require_once '../MAIN/update_profile.php';
     </div>
 </div>
 
-                <!-- Order History -->
-                <div class="col-lg-8" id="orderHistory">
-                    <div class="content-card">
-                        <h3><i class="fas fa-history"></i> Order History</h3>
-                        <div class="order-list">
-                            <?php
-                            // Assuming you have a function to fetch orders from the database
-                            $orders = []; // Replace with actual database query
-                            if (empty($orders)) {
-                                echo '<div class="no-orders">No orders found</div>';
-                            } else {
-                                foreach ($orders as $order) {
-                                    // Display each order
-                                }
-                            }
-                            ?>
-                            <!-- Sample Order Cards -->
-                            <div class="order-card">
-                                <div class="order-header">
-                                    <h4>Order #12345</h4>
-                                    <span class="order-status delivered">Delivered</span>
-                                </div>
-                                <div class="order-details">
-                                    <p><i class="fas fa-calendar"></i> Date: May 15, 2023</p>
-                                    <p><i class="fas fa-money-bill"></i> Total: ₱999.99</p>
-                                </div>
-                                <button class="view-btn">
-                                    <i class="fas fa-eye"></i> View Details
-                                </button>
-                            </div>
+<!-- Order History -->
+<div class="col-lg-8" id="orderHistory">
+    <div class="content-card">
+        <h3><i class="fas fa-history"></i> Order History</h3>
+        <div class="order-list">
+            <?php
+            require_once '../DATABASE/mainDB.php';
+            $db = new Database();
+            $conn = $db->getConnection();
 
-                            <div class="order-card">
-                                <div class="order-header">
-                                    <h4>Order #12346</h4>
-                                    <span class="order-status processing">Processing</span>
-                                </div>
-                                <div class="order-details">
-                                    <p><i class="fas fa-calendar"></i> Date: June 2, 2023</p>
-                                    <p><i class="fas fa-money-bill"></i> Total: ₱1,299.50</p>
-                                </div>
-                                <button class="view-btn">
-                                    <i class="fas fa-eye"></i> View Details
-                                </button>
-                            </div>
+            // Fetch orders for the current user
+            $user_id = $_SESSION['user_id']; // Assuming user_id is stored in session
+            $query = "SELECT * FROM menusbenta WHERE user_id = ? ORDER BY menu_id DESC";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("i", $user_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows === 0) {
+                echo '<div class="no-orders">No orders found</div>';
+            } else {
+                while ($order = $result->fetch_assoc()) {
+                    ?>
+                    <div class="order-card">
+                        <div class="order-header">
+                            <h4><?= htmlspecialchars($order['menu_name']) ?></h4>
+                        </div>
+                        <div class="order-details">
+                            <p><i class="fas fa-calendar"></i> Order ID: <?= $order['menu_id'] ?></p>
+                            <p><i class="fas fa-money-bill"></i> Price: ₱<?= number_format($order['price'], 2) ?></p>
+                            <p><i class="fas fa-shopping-cart"></i> Quantity: <?= $order['quantity'] ?></p>
+                            <p><i class="fas fa-money-bill-wave"></i> Total: ₱<?= number_format($order['total'], 2) ?></p>
                         </div>
                     </div>
-                </div>
-            </div>
+                    <?php
+                }
+            }
+            ?>
         </div>
-    </main>
+    </div>
+</div>
+
+</main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../MAIN/main.js"></script>
