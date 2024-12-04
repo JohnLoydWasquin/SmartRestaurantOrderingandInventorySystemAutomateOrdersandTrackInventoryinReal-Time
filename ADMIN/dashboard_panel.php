@@ -54,8 +54,8 @@
                             </a>
                         </li>
                         <li>
-                            <a href="?page=settings" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-gear"></i> <span class="ms-1 d-none d-sm-inline">Settings</span>
+                            <a href="../ADMIN/adminLogout.php" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-box-arrow-right"></i> <span class="ms-1 d-none d-sm-inline">Logout</span>
                             </a>
                         </li>
                     </ul>
@@ -194,26 +194,6 @@
                             echo '</tbody>
                         </table>
                     </div>';
-                } elseif ($page == 'settings') {
-                    echo '<h2>Settings</h2>
-                    <form class="mt-4">
-                        <div class="mb-3">
-                            <label for="siteName" class="form-label">Samgyup Paradise</label>
-                            <input type="text" class="form-control" id="siteName" value="My Awesome Website">
-                        </div>
-                        <div class="mb-3">
-                            <label for="siteDescription" class="form-label">Site Description</label>
-                            <textarea class="form-control" id="siteDescription" rows="3">Basta masarap dito</textarea>
-                        </div>
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="maintenanceMode">
-                            <label class="form-check-label" for="maintenanceMode">Enable Maintenance Mode</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save Settings</button>
-                    </form>';
-                } else {
-                    echo '<h2>Page Not Found</h2>
-                        <p>The page you are looking for does not exist.</p>';
                 }
                 ?>
             </div>
