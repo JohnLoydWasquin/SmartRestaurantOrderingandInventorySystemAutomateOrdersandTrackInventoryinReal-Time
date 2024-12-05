@@ -159,7 +159,7 @@
                 } elseif ($page == 'inventory') {
                     echo '<h2>Inventory Management</h2>
                     <div class="mt-4">
-                        <button class="btn btn-success mb-3 onclick="openAddItemModal()">Add New Item</button>
+                        <button class="btn btn-success mb-3" onclick="openAddItemModal()">Add New Item</button>
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -181,11 +181,11 @@
                                     <td>₱' . number_format($item['price'], 2) . '</td>
                                     <td>
                                         <button class="btn btn-sm btn-primary" onclick="openEditInventoryModal(
-                                            \''. htmlspecialchars($item['id']) .'\',
+                                            \''. addslashes($item['id']) .'\',
                                             \''. addslashes($item['name']) .'\',
                                             \''. addslashes($item['category']) .'\',
                                             \''. addslashes($item['stock']) .'\',
-                                            \''. htmlspecialchars($item['price']) .'\')">Edit</button>
+                                            \''. addslashes($item['price']) .'\')">Edit</button>
                                         <button class="btn btn-sm btn-danger" 
                             onclick="openDeleteInventoryModal(\''. htmlspecialchars($item['id']) .'\')">Delete</button>
                                     </td>
@@ -204,7 +204,7 @@
     <div class="modal" id="editUserModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form id="editUserForm" method="POST" action="../ADMIN/update_delete.php">
+            <form id="editUserForm" method="POST" action="../ADMIN/update_delete.php?page=users">
                 <div class="modal-header">
                     <h5 class="modal-title">Edit User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -236,11 +236,47 @@
     </div>
 </div>
 
+<!-- Add New Item Modal -->
+<div class="modal" id="addNewItemModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="addNewItemForm" method="POST" action="../ADMIN/addItem_function.php?page=inventory">
+        <div class="modal-header">
+          <h5 class="modal-title">Add New Inventory Item</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="newItemName" class="form-label">Item Name</label>
+            <input type="text" class="form-control" id="newItemName" name="item_name" required>
+          </div>
+          <div class="mb-3">
+            <label for="newCategory" class="form-label">Category</label>
+            <input type="text" class="form-control" id="newCategory" name="category" required>
+          </div>
+          <div class="mb-3">
+            <label for="newStock" class="form-label">Stock</label>
+            <input type="number" class="form-control" id="newStock" name="stock" required>
+          </div>
+          <div class="mb-3">
+            <label for="newPrice" class="form-label">Price</label>
+            <input type="number" step="0.01" class="form-control" id="newPrice" name="price" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" name="action" value="add" class="btn btn-primary">Add Item</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
     <!-- Edit Inventory Modal -->
-<div class="modal" id="editInventoryModal" tabindex="-1">
+    <div class="modal" id="editInventoryModal" tabindex="-1">
 <div class="modal-dialog">
     <div class="modal-content">
-        <form id="editInventoryForm" method="POST" action="../ADMIN/inventory_function.php">
+        <form id="editInventoryForm" method="POST" action="../ADMIN/inventory_function.php?page=inventory">
             <div class="modal-header">
                 <h5 class="modal-title">Edit Inventory Item</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

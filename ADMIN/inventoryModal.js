@@ -4,9 +4,10 @@ function openEditInventoryModal(id, name, category, stock, price) {
     document.getElementById('editCategory').value = category;
     document.getElementById('editStock').value = stock;
     document.getElementById('editPrice').value = price;
-
-    new bootstrap.Modal(document.getElementById('editInventoryModal')).show();
+    const modal = new bootstrap.Modal(document.getElementById('editInventoryModal'));
+    modal.show();
 }
+
 
 function openDeleteInventoryModal(id) {
     console.log(id);
@@ -59,3 +60,9 @@ function openDeleteInventoryModal(id) {
         }
     });
 }
+
+function openAddItemModal() {
+    const modal = new bootstrap.Modal(document.getElementById('addNewItemModal'));
+    modal.show();
+  }
+  
