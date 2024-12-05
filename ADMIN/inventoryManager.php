@@ -21,36 +21,41 @@ class InventoryManager {
         return $items;
     }
 
-    // Add a new item to the inventory
-    // public function addItem($id, $name, $category, $stock, $price) {
-    //     $this->inventoryItems[] = [
-    //         'id' => $id,
-    //         'name' => $name,
-    //         'category' => $category,
-    //         'stock' => $stock,
-    //         'price' => $price
-    //     ];
-    // }
-
-    // Update an existing item
-    public function updateItems($id, $name, $category, $stock, $price) {
-        $query = "UPDATE inventory SET name = ?, category = ?, stock = ?, price = ? WHERE id = ?";
+    public function addItem($name, $category, $stock, $price) {
+        $query = "INSERT INTO inventory (name, category, stock, price) VALUES (?, ?, ?, ?)";
         $stmt = $this->conn->prepare($query);
-        return $stmt->execute([$name, $category, $stock, $price, $id]);
+        $stmt->bind_param("ssdi", $name, $category, $stock, $price);
+        if (!$stmt->execute()) {
+            throw new Exception("Error adding item: " . $stmt->error);
+        }
+        return true;
     }
     
-
-    // // Delete an item from the inventory
-    // public function deleteItem($id) {
-    //     foreach ($this->inventoryItems as $key => $item) {
-    //         if ($item['id'] == $id) {
-    //             unset($this->inventoryItems[$key]);
-    //             $this->inventoryItems = array_values($this->inventoryItems); // Re-index array
-    //             return true; // Item deleted
-    //         }
-    //     }
-    //     return false; // Item not found
-    // }
+    // Update an existing item
+    public function updateItems($id, $name, $category, $stock, $price) {
+        try {
+            $query = "UPDATE inventory SET name = ?, category = ?, stock = ?, price = ? WHERE id = ?";
+            $stmt = $this->conn->prepare($query);
+            if (!$stmt) {
+                throw new Exception("Error preparing query: " . $this->conn->error);
+            }
+    
+            // Correct parameter types to match the query (ssidi)
+            $stmt->bind_param("ssidi", $name, $category, $stock, $price, $id);
+        
+            if (!$stmt->execute()) {
+                throw new Exception("Error executing query: " . $stmt->error);
+            }
+        
+            return true;
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            return false;
+        }
+    }
+    
+    
+    
 
     public function deleteItems($id) {
         $query = "DELETE FROM inventory WHERE id = ?";
