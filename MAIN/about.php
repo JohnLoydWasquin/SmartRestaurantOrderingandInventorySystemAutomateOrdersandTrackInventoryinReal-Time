@@ -119,7 +119,7 @@ require_once '../MAIN/update_profile.php';
                             alt="Profile Picture" 
                             class="profile-picture">
                                 <?php if (isset($_SESSION['fullName'])): ?>
-                                <span id="dropdownUserName" class="user-name"><a href="../MAIN/profile.html"><?php echo htmlspecialchars($_SESSION['fullName']); ?></a></span>
+                                <span id="dropdownUserName" class="user-name"><a href="../MAIN/profile.php"><?php echo htmlspecialchars($_SESSION['fullName']); ?></a></span>
                                 <?php else: ?>
                                     <a href="../LOGIN/login.html">Login</a>
                                 <?php endif; ?>
