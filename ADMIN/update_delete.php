@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $conn->prepare($query);
 
         if ($stmt) {
-            $stmt->bind_param('i', $bookingId);  // Bind the booking_id parameter as integer
+            $stmt->bind_param('i', $bookingId); 
             
             // Execute query
             if ($stmt->execute()) {

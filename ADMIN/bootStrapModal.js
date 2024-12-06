@@ -36,7 +36,7 @@ function openDeleteModal(userId) {
                         text: result.message,
                         confirmButtonText: 'OK'
                     }).then(() => {
-                        location.reload(); // Reload the page after deletion
+                        location.reload();
                     });
                 } else {
                     Swal.fire({

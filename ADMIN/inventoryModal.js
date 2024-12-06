@@ -39,7 +39,7 @@ function openDeleteInventoryModal(id) {
                         text: 'Successfully deleted!',
                         confirmButtonText: 'OK'
                     }).then(() => {
-                        location.reload(); // Reload the page after deletion
+                        location.reload(); 
                     });
                 } else {
                     Swal.fire({

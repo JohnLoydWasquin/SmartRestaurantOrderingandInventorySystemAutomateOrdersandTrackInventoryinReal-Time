@@ -36,7 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $updateResult = $userProfile->updateProfile($userId, $firstName, $lastName, $email, $phoneNumber, $profilePicture);
 
     if ($updateResult === true) {
-        // Redirect to profile page or show success message
         header('Location: ../MAIN/profile.php?success=1');
         exit;
     } else {

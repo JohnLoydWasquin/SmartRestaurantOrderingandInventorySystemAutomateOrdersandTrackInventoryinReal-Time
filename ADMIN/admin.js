@@ -4,12 +4,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const content = document.getElementById('content');
     const navLinks = document.querySelectorAll('.nav-link');
 
-    // Toggle sidebar
     toggleButton.addEventListener('click', function() {
         sidebar.classList.toggle('collapsed');
     });
 
-    // Handle navigation
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();

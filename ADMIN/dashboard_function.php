@@ -5,9 +5,8 @@ class DashboardFunctions {
     private $conn;
 
     public function __construct() {
-        // Assuming Database is a class that provides the connection
         $db = new Database();
-        $this->conn = $db->getConnection();  // Establish the database connection
+        $this->conn = $db->getConnection();
     }
 
     // Fetch total users
@@ -16,16 +15,16 @@ class DashboardFunctions {
         $result = $this->conn->query($query);
 
         if ($result === false) {
-            die("Query failed: " . $this->conn->error); // Handle query failure
+            die("Query failed: " . $this->conn->error); 
         }
 
         $row = $result->fetch_assoc();
-        return $row ? $row['totalUsers'] : 0;  // Return the totalUsers count
+        return $row ? $row['totalUsers'] : 0; 
     }
 
     // Fetch total revenue
     public function getTotalRevenue() {
-        $query = "SELECT SUM(total) AS totalRevenue FROM menusbenta"; // Adjust column name
+        $query = "SELECT SUM(total) AS totalRevenue FROM menusbenta"; 
         $result = $this->conn->query($query);
         return $result->fetch_assoc()['totalRevenue'] ?? 0;
     }
@@ -57,33 +56,30 @@ class DashboardFunctions {
     // Get Booked Table Inventory
     public function getBookedTables() {
         try {
-            $sql = "SELECT * FROM bookings";  // Assuming you're getting the bookings data here
+            $sql = "SELECT * FROM bookings"; 
             $stmt = $this->conn->query($sql);
     
             if ($stmt === false) {
-                throw new Exception("Query failed: " . $this->conn->error);  // Error handling
+                throw new Exception("Query failed: " . $this->conn->error); 
             }
     
             $bookedTables = [];
             while ($row = $stmt->fetch_assoc()) {
-                $tableNumber = $row['table_number'];  // Assuming 'table_number' is a column in 'bookings'
+                $tableNumber = $row['table_number']; 
     
-                // Group rows by table number
                 $bookedTables[$tableNumber][] = $row;
             }
     
             return $bookedTables;
     
         } catch (Exception $e) {
-            echo "Error: " . $e->getMessage();  // Error handling
+            echo "Error: " . $e->getMessage(); 
             return [];
         }
     }
     
-    // Delete booking and update table status
     public function deleteBooking($bookingId) {
         try {
-            // Get the table number associated with the booking
             $sqlGetTableNumber = "SELECT table_number FROM bookings WHERE booking_id = ?";
             $stmt = $this->conn->prepare($sqlGetTableNumber);
             $stmt->bind_param("i", $bookingId);
@@ -94,13 +90,11 @@ class DashboardFunctions {
                 $row = $result->fetch_assoc();
                 $tableNumber = $row['table_number'];
 
-                // Delete the booking from the bookings table
                 $sqlDelete = "DELETE FROM bookings WHERE booking_id = ?";
                 $stmtDelete = $this->conn->prepare($sqlDelete);
                 $stmtDelete->bind_param("i", $bookingId);
                 $stmtDelete->execute();
 
-                // Update the table status to not occupied
                 $sqlUpdateTable = "UPDATE tables SET is_occupied = 0 WHERE table_number = ?";
                 $stmtUpdateTable = $this->conn->prepare($sqlUpdateTable);
                 $stmtUpdateTable->bind_param("i", $tableNumber);

@@ -26,7 +26,6 @@ class Admin {
             $row = $result->fetch_assoc();
 
             if ($row['role'] === 'Admin') {
-                // Set session variables for the admin
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['firstName'] = $row['firstName'];
                 $_SESSION['lastName'] = $row['lastName'];
@@ -35,10 +34,10 @@ class Admin {
                 $_SESSION['role'] = $row['role'];
                 return true; // Admin login successful
             } else {
-                return "Access Denied"; // User exists but not an admin
+                return "Access Denied";
             }
         } else {
-            return false; // Login failed
+            return false;
         }
     }
 }
@@ -53,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $loginResult = $admin->login($email, $password);
 
     if ($loginResult === true) {
-        header("Location: ../ADMIN/dashboard_panel.php"); // Redirect to admin dashboard
+        header("Location: ../ADMIN/dashboard_panel.php");
         exit();
     } elseif ($loginResult === "Access Denied") {
         echo "
