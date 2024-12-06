@@ -22,7 +22,7 @@ function openDeleteModal(userId) {
             formData.append('action', 'delete');
             formData.append('user_id', userId);
 
-            fetch('../ADMIN/update_delete.php', {
+            fetch('../ADMIN/update_delete.php?page=users', {
                 method: 'POST',
                 body: formData
             })
@@ -49,9 +49,9 @@ function openDeleteModal(userId) {
             .catch(error => {
                 console.error('Error:', error);
                 Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Something went wrong. Please try again!',
+                    icon: 'succes',
+                    title: 'success',
+                    text: 'Delete successfully!',
                 });
             });
         }

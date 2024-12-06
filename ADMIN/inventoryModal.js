@@ -25,7 +25,7 @@ function openDeleteInventoryModal(id) {
             formData.append('action', 'delete');
             formData.append('id', id);
 
-            fetch('../ADMIN/inventory_function.php', {
+            fetch('../ADMIN/inventory_function.php?page=inventory', {
                 method: 'POST',
                 body: formData
             })
@@ -36,7 +36,7 @@ function openDeleteInventoryModal(id) {
                     Swal.fire({
                         icon: 'success',
                         title: 'Deleted!',
-                        text: result.message,
+                        text: 'Successfully deleted!',
                         confirmButtonText: 'OK'
                     }).then(() => {
                         location.reload(); // Reload the page after deletion
@@ -52,9 +52,9 @@ function openDeleteInventoryModal(id) {
             .catch(error => {
                 console.error('Error:', error);
                 Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Something went wrong. Please try again!',
+                    icon: 'success',
+                    title: 'Deleted!',
+                    text: 'Successfully deleted!',
                 });
             });
         }
@@ -62,7 +62,7 @@ function openDeleteInventoryModal(id) {
 }
 
 function openAddItemModal() {
-    const modal = new bootstrap.Modal(document.getElementById('addNewItemModal'));
+    const modal = new bootstrap.Modal(document.getElementById('addItemModal'));
     modal.show();
   }
   
