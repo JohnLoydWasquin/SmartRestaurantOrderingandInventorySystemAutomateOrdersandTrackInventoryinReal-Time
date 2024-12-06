@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../DATABASE/mainDB.php'; // Include your database connection
+require '../DATABASE/mainDB.php';
 require '../MENU/Cart.php';
 require '../MENU/ordersDBConn.php';
 
@@ -12,24 +12,24 @@ if (!isset($_SESSION['user_id'])) {
 $cart = new Cart();
 $cart_items = $cart->getCartItems();
 
-// Ensure cart is not empty
 if (empty($cart_items)) {
     echo "Your cart is empty.";
     exit;
 }
 
-// Database connection
 $db = new Database();
 $conn = $db->getConnection();
 
-$user_id = $_SESSION['user_id']; // Logged-in user's ID
+$user_id = $_SESSION['user_id'];
 $grand_total = 0;
 
-// Prepare SQL for inserting orders
-$insertOrderQuery = "INSERT INTO Orders (user_id, menu_id, menu_name, price, quantity, total) VALUES (?, ?, ?, ?, ?, ?)";
+$insertOrderQuery = "INSERT INTO menusbenta (user_id, menu_id, menu_name, price, quantity, total) VALUES (?, ?, ?, ?, ?, ?)";
 $stmt = $conn->prepare($insertOrderQuery);
 
-// Insert each cart item into the Orders table
+if (!$stmt) {
+    die("Error preparing statement: " . $conn->error);
+}
+
 foreach ($cart_items as $item) {
     $menu_id = $item['menu_id'];
     $menu_name = $item['menu_name'];
@@ -37,18 +37,17 @@ foreach ($cart_items as $item) {
     $quantity = $item['quantity'];
     $total = $price * $quantity;
 
-    // Add the total to the grand total
     $grand_total += $total;
 
-    // Bind parameters and execute the query
-    $stmt->bind_param("iisdid", $user_id, $menu_id, $menu_name, $price, $quantity, $total);
-    $stmt->execute();
+    $stmt->bind_param("iisddi", $user_id, $menu_id, $menu_name, $price, $quantity, $total);
+
+    if (!$stmt->execute()) {
+        die("Error executing statement: " . $stmt->error);
+    }
 }
 
-// Clear the cart after placing the order
 $_SESSION['cart'] = [];
 
-// Confirmation message and redirect
 echo "
 <!DOCTYPE html>
 <html lang='en'>

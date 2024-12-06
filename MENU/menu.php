@@ -153,7 +153,7 @@ if (!isset($_SESSION['total_cost'])) {
             <div class="headerbar">
                 <div class="account">
                     <ul>
-                        <a href="../MAIN/main.html">
+                        <a href="../MAIN/main.php">
                             <li>
                                 <i class="fa-solid fa-house-chimney"></i>
                             </li>
@@ -176,7 +176,7 @@ if (!isset($_SESSION['total_cost'])) {
                 </div>
                 <div class="nav">
                     <ul>
-                        <a href="../MAIN/main.html">
+                        <a href="../MAIN/main.php">
                             <li>Home</li>
                         </a>
                         <li>
@@ -206,7 +206,7 @@ if (!isset($_SESSION['total_cost'])) {
             </div>
             <div class="nav">
                 <ul>
-                    <a href="../MAIN/main.html">
+                    <a href="../MAIN/main.php">
                         <li>Home</li>
                     </a>
                     <li>
@@ -228,7 +228,7 @@ if (!isset($_SESSION['total_cost'])) {
             </div>
             <div class="account">
                 <ul>
-                    <a href="../MAIN/main.html">
+                    <a href="../MAIN/main.php">
                         <li>
                             <i class="fa-solid fa-house-chimney"></i>
                         </li>
@@ -242,11 +242,25 @@ if (!isset($_SESSION['total_cost'])) {
                         <input type="search" placeholder="Search...">
                         <i class="fa-solid fa-magnifying-glass srchicon"></i>
                     </div>
-                    <a href="../LOGIN/login.html">
-                        <li>
-                            <i class="fa-solid fa-user" id="user-lap"></i>
-                        </li>
-                    </a>
+                    <li class="dropdown-user">
+                                <a href="../LOGIN/login.html"><i class="fa-solid fa-user"></i></a>
+                        <ul class="dropdown">
+                            <li class="user-info">
+                            <img src="<?php echo isset($_SESSION['profilePicture']) && !empty($_SESSION['profilePicture']) 
+                            ? '../websiteImage/' . $_SESSION['profilePicture'] 
+                            : 'websiteImage/default.png'; ?>" 
+                            alt="Profile Picture" 
+                            class="profile-picture">
+                                <?php if (isset($_SESSION['fullName'])): ?>
+                                <span id="dropdownUserName" class="user-name"><a href="../MAIN/profile.php"><?php echo htmlspecialchars($_SESSION['fullName']); ?></a></span>
+                                <?php else: ?>
+                                    <a href="../LOGIN/login.html">Login</a>
+                                <?php endif; ?>
+                            </li>
+                            <li><a href="../MAIN/profile.php">Profile</a></li>
+                            <li><a href="../LOGIN/logout.php">Log Out</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -279,7 +293,17 @@ if (!isset($_SESSION['total_cost'])) {
                     min="1" 
                     max="<?php echo htmlspecialchars($item['quantity']); ?>" 
                     value="1">
-                <button type="submit" class="add-to-cart">Add To Cart</button>
+                    <button 
+                            type="button" 
+                            class="add-to-cart" 
+                            onclick="addToCart(
+                                <?php echo htmlspecialchars($item['menu_id']); ?>, 
+                                '<?php echo addslashes($item['menu_name']); ?>', 
+                                <?php echo htmlspecialchars($item['price']); ?>, 
+                                document.getElementById('quantity_<?php echo htmlspecialchars($item['menu_id']); ?>').value
+                            )">
+                            Add To Cart
+                        </button>
                 <span class="price">₱<?php echo number_format($item['price'], 2); ?></span>
             </form>
         </div>
@@ -294,7 +318,7 @@ if (!isset($_SESSION['total_cost'])) {
     <script src="../MAIN/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-    function addToCart(menu_id, menu_name, price, quantity = 1) {
+    function addToCart(menu_id, menu_name, price, quantity) {
     $.ajax({
         url: '../MENU/add_to_cart.php',
         type: 'POST',
@@ -306,13 +330,8 @@ if (!isset($_SESSION['total_cost'])) {
         },
         success: function(response) {
             const data = JSON.parse(response);
-<<<<<<< HEAD:menu.php
-
-=======
-            
->>>>>>> 5936ebf6b100a55cd626a39d05c5814e5fcfa411:MENU/menu.php
             if (data.total_cost) {
-                document.getElementById("basket-total").innerText = `Total: $${data.total_cost}`;
+                document.getElementById("basket-total").innerText = `Total: ₱${data.total_cost}`;
             }
         },
         error: function() {
@@ -321,6 +340,5 @@ if (!isset($_SESSION['total_cost'])) {
     });
 }
 </script>
-
 </body>
 </html>

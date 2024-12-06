@@ -21,6 +21,7 @@ $orderNumber = rand(1000, 9999);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="websiteImage/LogoFP.webp">
     <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+    <link rel="icon" type="image/x-icon" href="../websiteImage/LogoFP.webp">
     <title>Receipt</title>
     <style>
     body {

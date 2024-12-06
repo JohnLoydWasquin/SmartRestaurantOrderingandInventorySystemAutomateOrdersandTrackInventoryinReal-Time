@@ -6,6 +6,7 @@
     <title>Samgyup - Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -33,7 +34,7 @@
             <!-- Sidebar -->
             <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 sidebar">
                 <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                    <a href="../MAIN/main.html" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <a href="../MAIN/main.php" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                         <span class="fs-5 d-none d-sm-inline">Admin Dashboard</span>
                     </a>
                     <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
@@ -49,12 +50,12 @@
                         </li>
                         <li>
                             <a href="?page=inventory" class="nav-link px-0 align-middle">
-                                <i class="bi bi-box"></i> <span class="ms-1 d-none d-sm-inline">Inventory</span>
+                                <i class="bi bi-box"></i> <span class="ms-1 d-none d-sm-inline">Menu Inventory</span>
                             </a>
                         </li>
                         <li>
-                            <a href="?page=settings" class="nav-link px-0 align-middle">
-                                <i class="fs-4 bi-gear"></i> <span class="ms-1 d-none d-sm-inline">Settings</span>
+                            <a href="../ADMIN/adminLogout.php" class="nav-link px-0 align-middle">
+                                <i class="fs-4 bi-box-arrow-right"></i> <span class="ms-1 d-none d-sm-inline">Logout</span>
                             </a>
                         </li>
                     </ul>
@@ -149,17 +150,16 @@
                                 \''. addslashes($user['email']) .'\',
                                 \''. ($user['role'] ?? 'User') .'\')">Edit</button>
                     <button class="btn btn-sm btn-danger" 
-                            onclick="deleteUser(\''. htmlspecialchars($user['user_id']) .'\')">Delete</button>
+                            onclick="openDeleteModal(\''. htmlspecialchars($user['user_id']) .'\')">Delete</button>
                         </td>
                             </tr>';
                         }
-                    
                         echo '</tbody>
                         </table>';
                 } elseif ($page == 'inventory') {
                     echo '<h2>Inventory Management</h2>
                     <div class="mt-4">
-                        <button class="btn btn-success mb-3 onclick="openAddItemModal()">Add New Item</button>
+                        <button class="btn btn-success mb-3" onclick="openAddItemModal()">Add New Item</button>
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -181,38 +181,19 @@
                                     <td>₱' . number_format($item['price'], 2) . '</td>
                                     <td>
                                         <button class="btn btn-sm btn-primary" onclick="openEditInventoryModal(
-                                            \''. htmlspecialchars($item['id']) .'\',
+                                            \''. addslashes($item['id']) .'\',
                                             \''. addslashes($item['name']) .'\',
                                             \''. addslashes($item['category']) .'\',
                                             \''. addslashes($item['stock']) .'\',
-                                            \''. htmlspecialchars($item['price']) .'\')">Edit</button>
-                                        <button class="btn btn-sm btn-danger" >Delete</button>
+                                            \''. addslashes($item['price']) .'\')">Edit</button>
+                                        <button class="btn btn-sm btn-danger" 
+                            onclick="openDeleteInventoryModal(\''. htmlspecialchars($item['id']) .'\')">Delete</button>
                                     </td>
                                 </tr>';
                             }
                             echo '</tbody>
                         </table>
                     </div>';
-                } elseif ($page == 'settings') {
-                    echo '<h2>Settings</h2>
-                    <form class="mt-4">
-                        <div class="mb-3">
-                            <label for="siteName" class="form-label">Samgyup Paradise</label>
-                            <input type="text" class="form-control" id="siteName" value="My Awesome Website">
-                        </div>
-                        <div class="mb-3">
-                            <label for="siteDescription" class="form-label">Site Description</label>
-                            <textarea class="form-control" id="siteDescription" rows="3">Basta masarap dito</textarea>
-                        </div>
-                        <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="maintenanceMode">
-                            <label class="form-check-label" for="maintenanceMode">Enable Maintenance Mode</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save Settings</button>
-                    </form>';
-                } else {
-                    echo '<h2>Page Not Found</h2>
-                        <p>The page you are looking for does not exist.</p>';
                 }
                 ?>
             </div>
@@ -223,7 +204,7 @@
     <div class="modal" id="editUserModal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form id="editUserForm" method="POST" action="../ADMIN/update_delete.php">
+            <form id="editUserForm" method="POST" action="../ADMIN/update_delete.php?page=users">
                 <div class="modal-header">
                     <h5 class="modal-title">Edit User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -255,11 +236,47 @@
     </div>
 </div>
 
+<!-- Add New Item Modal -->
+<div class="modal" id="addNewItemModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="addNewItemForm" method="POST" action="../ADMIN/addItem_function.php?page=inventory">
+        <div class="modal-header">
+          <h5 class="modal-title">Add New Inventory Item</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="newItemName" class="form-label">Item Name</label>
+            <input type="text" class="form-control" id="newItemName" name="item_name" required>
+          </div>
+          <div class="mb-3">
+            <label for="newCategory" class="form-label">Category</label>
+            <input type="text" class="form-control" id="newCategory" name="category" required>
+          </div>
+          <div class="mb-3">
+            <label for="newStock" class="form-label">Stock</label>
+            <input type="number" class="form-control" id="newStock" name="stock" required>
+          </div>
+          <div class="mb-3">
+            <label for="newPrice" class="form-label">Price</label>
+            <input type="number" step="0.01" class="form-control" id="newPrice" name="price" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" name="action" value="add" class="btn btn-primary">Add Item</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
     <!-- Edit Inventory Modal -->
-<div class="modal" id="editInventoryModal" tabindex="-1">
+    <div class="modal" id="editInventoryModal" tabindex="-1">
 <div class="modal-dialog">
     <div class="modal-content">
-        <form id="editInventoryForm" method="POST" action="../ADMIN/inventory_function.php">
+        <form id="editInventoryForm" method="POST" action="../ADMIN/inventory_function.php?page=inventory">
             <div class="modal-header">
                 <h5 class="modal-title">Edit Inventory Item</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
