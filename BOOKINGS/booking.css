@@ -1,0 +1,174 @@
+/*--------------ReserveTableMain CSS---------------*/
+.booking-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding-top: 10px;
+    background-color: rgb(248, 232, 217);
+}
+
+.booking-container {
+    background-color: #fff;
+    padding: 20px;
+    width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.booking-container h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: rgb(253, 57, 8);
+    margin-bottom: 20px;
+}
+
+.form-field {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-field input {
+    width: 48%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.large-field input {
+    width: 100%;
+}
+
+.order-button {
+    width: 100%;
+    padding: 10px;
+    background-color: rgb(253, 77, 8);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.order-button:hover {
+    background-color: #d4a60d;
+}
+
+.image-container {
+    margin-top: 15px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.image-container img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+/* Responsive styles */
+@media only screen and (max-width: 768px) {
+    .nav ul {
+        flex-direction: column;
+    }
+}
+
+.table {
+    display: inline-block;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid black;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 18px;
+}
+.occupied {
+    background-color: #ccc;
+    cursor: not-allowed;
+    color: #fff;
+}
+.available {
+     background-color: green;
+     pointer-events: auto; /* Allow clicking */
+     opacity: 1;
+}       
+.selected {
+    border: 2px solid blue;
+}
+.form-field {
+    margin: 10px 10;
+}
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+.success-message {
+    color: green;
+    margin-top: 10px;
+}
+
+/* Styling for the table container */
+#tableContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between rows */
+    justify-content: center;
+    align-items: center;
+}
+
+/* Styling for each row of table buttons */
+.table-row {
+    display: flex;
+    gap: 15px; /* Space between table buttons */
+}
+
+/* Basic styling for the table buttons */
+.table-button {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border 0.3s ease;
+    text-align: center;
+}
+
+/* Hover effect for table buttons */
+.table-button:hover {
+    background-color: #cce5ff;
+}
+
+/* Style for selected table */
+.table-button.selected {
+    background-color: #cce5ff;
+    border: 2px solid #0056b3;
+    color: #0056b3;
+}
+
+/* Style for table numbers to be visually distinct */
+.table-button:focus {
+    outline: none;
+}
+
+/* Add this to your CSS file */
+.swal2-confirm.go-back-button {
+    background-color: rgb(253, 57, 8); /* Button color */
+    color: white; /* Text color */
+    border: none; /* Remove border */
+    font-weight: bold; /* Optional: Make text bold */
+}
+
+.swal2-confirm.go-back-button:hover {
+    background-color: rgb(230, 50, 7); /* Slightly darker color on hover */
+}

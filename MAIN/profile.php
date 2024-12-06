@@ -61,7 +61,7 @@ require_once '../MAIN/update_profile.php';
                     <a href="../MAIN/about.php">
                         <li>About</li>
                     </a>
-                    <a href="../MAIN/bTable.html">
+                    <a href="../BOOKINGS/bTable.php">
                         <li>Book Table</li>
                     </a>
                 </ul>
@@ -91,7 +91,7 @@ require_once '../MAIN/update_profile.php';
                 <a href="../MAIN/about.php">
                     <li>About</li>
                 </a>
-                <a href="../MAIN/bTable.html">
+                <a href="../BOOKINGS/bTable.php">
                     <li>Book Table</li>
                 </a>
             </ul>
