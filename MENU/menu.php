@@ -318,7 +318,7 @@ if (!isset($_SESSION['total_cost'])) {
     <script src="../MAIN/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-    function addToCart(menu_id, menu_name, price, quantity = 1) {
+    function addToCart(menu_id, menu_name, price, quantity) {
     $.ajax({
         url: '../MENU/add_to_cart.php',
         type: 'POST',

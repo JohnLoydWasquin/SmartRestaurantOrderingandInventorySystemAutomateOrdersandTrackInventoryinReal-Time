@@ -102,7 +102,6 @@
     </style>
 </head>
 <body>
-    <button class="back-button">←</button>
     
     <div class="login-container">
         <h1>Admin Login</h1>
@@ -111,7 +110,7 @@
             <p style="color: red;"><?php echo htmlspecialchars($error); ?></p>
         <?php endif; ?>
 
-        <form action="../ADMIN/admin_login.php" method="POST">
+        <form action="../ADMIN/adminLogin_function.php" method="POST">
             <div class="input-group">
                 <input type="email" name="email" placeholder="Email" required>
             </div>
