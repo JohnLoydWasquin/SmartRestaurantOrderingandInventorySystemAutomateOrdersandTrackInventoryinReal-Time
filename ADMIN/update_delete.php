@@ -2,10 +2,10 @@
 require_once '../DATABASE/mainDB.php';
 require_once '../ADMIN/dashboard_panel.php';
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
 
+    // Handle Update action for Users
     if ($action === 'update') {
         $userId = $_POST['user_id'];
         $firstName = $_POST['firstName'];
@@ -40,7 +40,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             echo "<script>alert('Error updating user.');</script>";
         }
-    } elseif ($action === 'delete') {
+    }
+    // Handle Delete action for Users
+    elseif ($action === 'delete' && isset($_POST['user_id'])) {
         $userId = $_POST['user_id'];
 
         if (empty($userId)) {
@@ -54,4 +56,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode(['status' => 'error', 'message' => 'Error deleting user.']);
         }
     }
+    // Handle Delete action for Bookings (BookTable)
+    elseif ($action === 'delete' && isset($_POST['booking_id'])) {
+        $bookingId = $_POST['booking_id'];
+
+        if (empty($bookingId)) {
+            echo json_encode(['status' => 'error', 'message' => 'Error: booking_id is missing.']);
+            exit;
+        }
+
+        // Initialize database connection
+        $db = new Database();
+        $conn = $db->getConnection();
+
+        // Prepare delete query for booking
+        $query = "DELETE FROM bookings WHERE booking_id = ?";
+        $stmt = $conn->prepare($query);
+
+        if ($stmt) {
+            $stmt->bind_param('i', $bookingId);  // Bind the booking_id parameter as integer
+            
+            // Execute query
+            if ($stmt->execute()) {
+                echo json_encode(['status' => 'success', 'message' => 'Booking has been deleted successfully.']);
+            } else {
+                echo json_encode(['status' => 'error', 'message' => 'Error deleting booking.']);
+            }
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Error preparing query.']);
+        }
+    }
 }
+?>
