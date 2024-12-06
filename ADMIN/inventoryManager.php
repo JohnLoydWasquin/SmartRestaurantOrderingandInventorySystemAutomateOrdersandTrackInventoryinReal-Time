@@ -63,4 +63,37 @@ class InventoryManager {
         }
         return true;
     }
+     // Fetch booked tables
+     public function getBookedTables() {
+        $query = "SELECT 
+                    booking_id, 
+                    table_number, 
+                    user_id,
+                    first_name, 
+                    last_name, 
+                    email,
+                    phone,
+                    booking_date, 
+                    booking_time, 
+                    created_at
+                  FROM bookings"; //
+        // Execute the query
+        $result = $this->conn->query($query);
+        
+        // Check if the query was successful
+        if (!$result) {
+            return $result->fetchAll();
+        }
+    
+        // Fetch the results into an array
+        $bookedTables = [];
+        while ($row = $result->fetch_assoc()) {
+            $bookedTables[] = $row;
+        }
+        
+        return $bookedTables;
+    }
 }
+    
+    
+
