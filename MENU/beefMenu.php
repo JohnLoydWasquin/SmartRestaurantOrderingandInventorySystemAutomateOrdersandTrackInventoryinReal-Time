@@ -143,7 +143,7 @@ if (!isset($_SESSION['total_cost'])) {
                         <a href="../MAIN/about.php">
                             <li>About</li>
                         </a>
-                        <a href="../MAIN/bTable.php">
+                        <a href="../BOOKINGS/bTable.php">
                             <li>Book Table</li>
                         </a>
                     </ul>
@@ -158,7 +158,7 @@ if (!isset($_SESSION['total_cost'])) {
             </div>
             <div class="nav">
                 <ul>
-                    <a href="../MAIN/main.html">
+                    <a href="../MAIN/main.php">
                         <li>Home</li>
                     </a>
                     <li>
@@ -173,7 +173,7 @@ if (!isset($_SESSION['total_cost'])) {
                     <a href="../MAIN/about.php">
                         <li>About</li>
                     </a>
-                    <a href="../MAIN/bTable.php">
+                    <a href="../BOOKINGS/bTable.php">
                         <li>Book Table</li>
                     </a>
                 </ul>

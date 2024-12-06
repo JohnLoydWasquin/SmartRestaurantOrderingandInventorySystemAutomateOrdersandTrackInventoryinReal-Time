@@ -1,16 +1,20 @@
 <?php
-    session_start();
-    require_once '../DATABASE/mainDB.php';
-    require_once '../LOGIN/login.php';
+session_start();
+require_once '../DATABASE/mainDB.php';
+require_once '../LOGIN/login.php';
+require_once '../MAIN/update_profile.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+          integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" type="text/css" href="../MAIN/style.css">
-    <link rel="icon" type="image/x-icon" href="../websiteImage/LogoFP.webp">
+    <link rel="stylesheet" type="text/css" href="../BOOKINGS/booking.css">
+    <link rel="icon" type="image/x-icon" href="websiteImage/LogoFP.webp">
+    <script src="../BOOKINGS/profile.js"></script>
     <title>Samgyup Paradise</title>
 </head>
 <body>
@@ -19,15 +23,15 @@
             <div class="headerbar">
                 <div class="account">
                     <ul>
-                        <a href="../MAIN/main.php">
+                        <a href="../MAIN/main.html">
                             <li>
                                 <i class="fa-solid fa-house-chimney"></i>
                             </li>
                         </a>
                         <a href="#">
-                             <li>
+                            <li>
                                 <i class="fa-solid fa-magnifying-glass searchicon" id="searchicon1"></i>
-                             </li>
+                            </li>
                         </a>
                         <div class="search" id="searchinput1">
                             <input type="search" placeholder="Search...">
@@ -46,13 +50,13 @@
                             <li>Home</li>
                         </a>
                         <li>
-                        <a href="#">Menu</a>
-                        <ul class="dropdown">
-                            <li><a href="../MENU/menu.php">Pork Menu</a></li>
-                            <li><a href="../MENU/beefMenu.php">Beef Menu</a></li>
-                            <li><a href="../MENU/chickenMenu.php">Chicken Menu</a></li>
-                            <li><a href="../MENU/sideDishes.php">Side Dishes</a></li>
-                        </ul>
+                            <a href="#">Menu</a>
+                            <ul class="dropdown">
+                                <li><a href="../MENU/menu.php">Pork Menu</a></li>
+                                <li><a href="../MENU/beefMenu.php">Beef Menu</a></li>
+                                <li><a href="../MENU/chickenMenu.php">Chicken Menu</a></li>
+                                <li><a href="../MENU/sideDishes.php">Side Dishes</a></li>
+                            </ul>
                         </li>
                         <a href="../MAIN/about.php">
                             <li>About</li>
@@ -62,6 +66,7 @@
                         </a>
                     </ul>
                 </div>
+                <?php include 'menu.php'; ?>
             </div>
             <div class="logo">
                 <h2>SAMGYUP PARADISE</h2>
@@ -127,84 +132,54 @@
                             <li><a href="../LOGIN/logout.php">Log Out</a></li>
                         </ul>
                     </li>
+
+                    </a>
                 </ul>
             </div>
         </div>
     </header>
 
-    <div class="home">
-        <div class="main_slide">
-            <div>
-                <a href="../MENU/menu.php">
-                <h1>Welcome to <span>Samgyup</span> Paradise</h1>
-                <p>Your Ultimate Destination for Authentic Korean BBQ Delights! Grill, Savor, and Enjoy the Perfect Samgyupsal Experience with Premium Cuts, Fresh Ingredients, and Unmatched Flavors.</p>
+    <main class="booking-section">
+        <div class="booking-container">
+            <h2>BOOKING</h2>
+            <div style="margin: 20px 0;">
+                <h3>Select a Table</h3>
+                <div id="tableContainer"></div>
+            </div>
 
-                <button class="red_btn">Visit Now <i class="fa-solid fa-arrow-right-long"></i></button>
-                </a>
-            </div>
-            <div>
-                <img src="../websiteImage/samgImage.png" alt="samgImage">
-            </div>
-        </div>
-    </div>
+            <div class="error-message" id="errorMessage"></div>
+            <div class="success-message" id="successMessage"></div>
 
-    <footer class="footer1">
-        <div class="footer-container">
-            <div class="dine-with-us">
-                <h2>Dine With Us</h2>
-                <h2>Book A Table</h2>
-                <img src="../websiteImage/reserve-table.webp" alt="Dine Table" class="table-img">
-            </div>
-    
-            <div class="footer-right">
-                <div class="reserve">
-                    <a href="../BOOKINGS/bTable.php">
-                    <h2>Reserve Online</h2>
-                    <p>Book a table online at Samgyup Paradise.</p>
-                    <button class="book-now-btn">Book Now</button>
-                    </a>
+            <form id="bookingForm" method="POST" action="booking.php" onsubmit="return validateForm()">
+                <input type="hidden" id="selectedTable" name="selectedTable">
+
+                <div class="form-field">
+                    <input type="text" name="first_name" id="first_name" placeholder="First Name" required>
+                    <input type="text" name="last_name" id="last_name" placeholder="Last Name" required>
                 </div>
-            </div>
-            <div class="opening-times">
-                <h2>Opening Times</h2>
-                <h3>Tuesday - Thursday</h3>
-                <p>17:00 - 22:30</p>
-                <h3>Friday</h3>
-                <p>17:00 - 23:00</p>
-                <h3>Saturday</h3>
-                <p>12:00 - 23:00</p>
-                <h3>Sunday</h3>
-                <p>12:00 - 22:00</p>
-            </div>
-        </div>
-    </footer>
-    
-    <footer class="footer2">
-        <div class="footer-container2">
-            <div class="webFooter">
-                <h2>SAMGYUP PARADISE</h2>
-                <p>&copy;Unlimited Samgyup Since 2024.</p>
-            </div>
 
-        <div class="footer-right2">
-            <h2>Quick Links</h2>
-            <a href="https://www.facebook.com/johnloyd.wasquin.1?mibextid=ZbWKwL"><i class="fa-brands fa-facebook"></i></a>
-            <a href="https://myaccount.google.com/u/2/?gar=WzJd&hl=en&utm_source=OGB&utm_medium=act"><i class="fa-brands fa-google"></i></a>
-            <a href="https://github.com/JohnLoydWasquin/SmartRestaurantOrderingandInventorySystemAutomateOrdersandTrackInventoryinReal-Time">
-            <i class="fa-brands fa-github"></i></a>
+                <div class="form-field">
+                    <input type="email" name="email" id="email" placeholder="Email" required>
+                    <input type="number" name="phone" id="phone" placeholder="Phone" required>
+                </div>
+
+                <div class="form-field">
+                    <input type="date" name="booking_date" id="booking_date" placeholder="Date" required>
+                    <input type="time" name="booking_time" id="booking_time" placeholder="Time" required>
+                </div>
+
+                <div class="form-field large-field">
+                    <input type="text" name="additional_notes" id="additional_notes" placeholder="Additional Notes (optional)">
+                </div>
+                <button type="submit" class="order-button">Book Table</button>
+            </form>
         </div>
-        <div class="footer-right3">
-            <h2>For Inquiries</h2>
-            <a href="mailto:johnloydwasquin27@gmail.com">samgparadise27@gmail.com</a>
-            <br>
-            <a href="mailto:johnloydwasquin27@gmail.com">johnloydwasquin27@gmail.com</a>
-            <br>
-            <a href="mailto:toledodyuleeann@gmail.com">toledodyuleeann@gmail.com</a>
-            <br>
-            <a href="mailto:plvergaraben17@gmail.com">plvergaraben17@gmail.com</a>
-        </div>
-    </div>
-    </footer>
+    </main>
+
+    <script src="../BOOKINGS/bTable.js"></script>
+    <script src="../BOOKINGS/profile.js"></script>
+    <script src="../BOOKINGS/tableSelection.js"></script>
+    <script src="../BOOKINGS/formValidation.js"></script>
     <script src="../MAIN/main.js"></script>
 </body>
 </html>

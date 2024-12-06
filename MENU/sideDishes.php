@@ -187,7 +187,7 @@ try {
                         <a href="../MAIN/about.php">
                             <li>About</li>
                         </a>
-                        <a href="../MAIN/bTable.php">
+                        <a href="../BOOKINGS/bTable.php">
                             <li>Book Table</li>
                         </a>
                     </ul>
@@ -217,7 +217,7 @@ try {
                     <a href="../MAIN/about.php">
                         <li>About</li>
                     </a>
-                    <a href="../MAIN/bTable.php">
+                    <a href="../BOOKINGS/bTable.php">
                         <li>Book Table</li>
                     </a>
                 </ul>
