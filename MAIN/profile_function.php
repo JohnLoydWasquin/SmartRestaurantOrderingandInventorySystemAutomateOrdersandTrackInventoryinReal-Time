@@ -6,27 +6,24 @@ class UsersProfile {
 
     public function __construct() {
         $db = new Database();
-        $this->conn = $db->getConnection(); // Initialize the connection
+        $this->conn = $db->getConnection();
     }
 
     public function updateProfile($userId, $firstName, $lastName, $email, $phoneNumber, $profilePicture = null) {
         try {
-            // Base query
-            $updateQuery = "UPDATE Users SET firstName = ?, lastName = ?, email = ?, phoneNumber = ?";
+            $updateQuery = "UPDATE Users SET firstName = ?, lastName = ?, email = ?, PhoneNumber = ?";
             
-            // Include profile picture if provided
             if ($profilePicture) {
                 $updateQuery .= ", profile_picture = ?";
             }
             $updateQuery .= " WHERE user_id = ?";
     
-            // Prepare statement
             $stmt = $this->conn->prepare($updateQuery);
     
             // Bind parameters
             if ($profilePicture) {
                 $stmt->bind_param(
-                    'sssssi', // Types: s = string, i = integer
+                    'sssssi',
                     $firstName,
                     $lastName,
                     $email,
@@ -36,7 +33,7 @@ class UsersProfile {
                 );
             } else {
                 $stmt->bind_param(
-                    'ssssi', // Types: s = string, i = integer
+                    'ssssi',
                     $firstName,
                     $lastName,
                     $email,
@@ -47,12 +44,11 @@ class UsersProfile {
     
             // Execute query
             if ($stmt->execute()) {
-                // Update session variables if session is active
                 if (session_status() === PHP_SESSION_ACTIVE) {
                     $_SESSION['firstName'] = $firstName;
                     $_SESSION['lastName'] = $lastName;
                     $_SESSION['email'] = $email;
-                    $_SESSION['phoneNumber'] = $phoneNumber;
+                    $_SESSION['PhoneNumber'] = $phoneNumber;
                     if ($profilePicture) {
                         $_SESSION['profilePicture'] = $profilePicture;
                     }
@@ -62,7 +58,6 @@ class UsersProfile {
                 return "Error: Could not execute update.";
             }
         } catch (mysqli_sql_exception $e) {
-            // Handle exceptions
             return "Database Error: " . $e->getMessage();
         }
     }    

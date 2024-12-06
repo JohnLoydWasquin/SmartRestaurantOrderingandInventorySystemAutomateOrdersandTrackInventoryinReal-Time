@@ -179,8 +179,8 @@ require_once '../MAIN/update_profile.php';
             </div>
             <div class="form-group mb-3">
                 <label for="phone">Phone</label>
-                <input type="tel" class="form-control" id="phone" name="phone"
-                        value="<?php echo htmlspecialchars($_SESSION['phone'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" required>
+                <input type="tel" class="form-control" id="PhoneNumber" name="phone"
+                        value="<?php echo htmlspecialchars($_SESSION['PhoneNumber'] ?? '', ENT_QUOTES, 'UTF-8'); ?>" required>
             </div>
             <div class="form-group mb-3">
                 <label for="profilePicture">Profile Picture</label>

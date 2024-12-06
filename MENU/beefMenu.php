@@ -229,10 +229,13 @@ if (!isset($_SESSION['total_cost'])) {
                 <img src="../websiteImage/beefmenu<?php echo $item['menu_id']; ?>.png" alt="<?php echo htmlspecialchars($item['menu_name']); ?>">
                 <h3><?php echo htmlspecialchars($item['menu_name']); ?></h3>
                 <p><?php echo htmlspecialchars($item['description']); ?></p>
-                <form action="../MENU/add_to_cart.php" method="POST">
+                <form action="../MENU/add_to_cart.php" method="POST" id="menus">
                     <input type="hidden" name="menu_id" value="<?php echo htmlspecialchars($item['menu_id']); ?>">
                     <input type="hidden" name="menu_name" value="<?php echo htmlspecialchars($item['menu_name']); ?>">
                     <input type="hidden" name="price" value="<?php echo htmlspecialchars($item['price']); ?>">
+                    <input type="hidden" name="description" value="<?php echo htmlspecialchars($item['description']); ?>">
+                    <input type="hidden" name="category" value="<?php echo htmlspecialchars($item['category']); ?>">
+                    <input type="hidden" name="menu_type" value="<?php echo htmlspecialchars($menu_type); ?>">
                     <label for="quantity_<?php echo $item['menu_id']; ?>">Quantity:</label>
                     <input 
                         type="number" 
@@ -267,7 +270,7 @@ if (!isset($_SESSION['total_cost'])) {
 <script src="../MAIN/main.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-    function addToCart(menu_id, menu_name, price, quantity = 1) {
+    function addToCart(menu_id, menu_name, price, quantity) {
     $.ajax({
         url: '../MENU/add_to_cart.php',
         type: 'POST',
