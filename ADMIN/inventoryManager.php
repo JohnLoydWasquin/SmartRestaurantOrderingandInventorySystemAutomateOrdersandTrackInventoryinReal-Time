@@ -53,9 +53,6 @@ class InventoryManager {
             return false;
         }
     }
-    
-    
-    
 
     public function deleteItems($id) {
         $query = "DELETE FROM inventory WHERE id = ?";
