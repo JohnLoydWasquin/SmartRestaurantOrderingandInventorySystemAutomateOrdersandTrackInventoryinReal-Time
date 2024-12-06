@@ -1,4 +1,5 @@
 <?php
+require_once '../DATABASE/mainDB.php';
 class BookTable {
 
     private $conn;

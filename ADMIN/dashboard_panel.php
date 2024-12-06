@@ -205,8 +205,6 @@
                         </table>
                     </div>';
                 }
-
-                // BOOKED TABLES PAGE
                 
                 // BOOKED TABLES PAGE
 elseif ($page == 'booked_tables') {
@@ -271,6 +269,147 @@ elseif ($page == 'booked_tables') {
         </div>
     </div>
 
+    <!-- Edit/Delete User Modal -->
+    <div class="modal" id="editUserModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="editUserForm" method="POST" action="../ADMIN/update_delete.php?page=users">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="user_id" id="editUserId">
+                    <div class="mb-3">
+                        <label for="editFirstName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="editFirstName" name="firstName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="editEmail" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editRole" class="form-label">Role</label>
+                        <select class="form-select" id="editRole" name="role" required>
+                            <option value="Admin">Admin</option>
+                            <option value="User">User</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" name="action" value="update" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Inventory Modal -->
+<div class="modal" id="editInventoryModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="editInventoryForm" method="POST" action="../ADMIN/inventory_function.php?page=inventory">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Inventory Item</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="item_id" id="editItemId">
+                    <div class="mb-3">
+                        <label for="editItemName" class="form-label">Item Name</label>
+                        <input type="text" class="form-control" id="editItemName" name="item_name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editCategory" class="form-label">Category</label>
+                        <input type="text" class="form-control" id="editCategory" name="category" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editStock" class="form-label">Stock</label>
+                        <input type="number" class="form-control" id="editStock" name="stock" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editPrice" class="form-label">Price</label>
+                        <input type="number" step="0.01" class="form-control" id="editPrice" name="price" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" name="action" value="update" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Add New Item Modal -->
+<div class="modal" id="addNewItemModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="addNewItemForm" method="POST" action="../ADMIN/addItem_function.php?page=inventory">
+        <div class="modal-header">
+          <h5 class="modal-title">Add New Inventory Item</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="newItemName" class="form-label">Item Name</label>
+            <input type="text" class="form-control" id="newItemName" name="item_name" required>
+          </div>
+          <div class="mb-3">
+            <label for="newCategory" class="form-label">Category</label>
+            <input type="text" class="form-control" id="newCategory" name="category" required>
+          </div>
+          <div class="mb-3">
+            <label for="newStock" class="form-label">Stock</label>
+            <input type="number" class="form-control" id="newStock" name="stock" required>
+          </div>
+          <div class="mb-3">
+            <label for="newPrice" class="form-label">Price</label>
+            <input type="number" step="0.01" class="form-control" id="newPrice" name="price" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="submit" name="action" value="add" class="btn btn-primary">Add Item</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    function openAddItemModal(id, name, category, stock, price) {
+    // Assign values to modal inputs
+    document.getElementById('itemId').value = id;
+    document.getElementById('itemName').value = name;
+    document.getElementById('itemCategory').value = category;
+    document.getElementById('itemStock').value = stock;
+    document.getElementById('itemPrice').value = price;
+
+    // Show modal
+    new bootstrap.Modal(document.getElementById('addNewItemModal')).show();
+    }
+    </script>
+
+    <script>
+        function openEditModal(userId, firstName, email, role) {
+            document.getElementById('editUserId').value = userId;
+            document.getElementById('editFirstName').value = firstName;
+            document.getElementById('editEmail').value = email;
+            document.getElementById('editRole').value = role;
+
+            new bootstrap.Modal(document.getElementById('editUserModal')).show();
+        }
+
+        function deleteUser(userId) {
+            if (confirm('Are you sure you want to delete this user?')) {
+                alert(`Deleting user with ID: ${userId}`);
+            }
+        }
+    </script>
+    <script src="../ADMIN/bootStrapModal.js"></script>
+    <script src="../ADMIN/inventoryModal.js"></script>
 </body>
 </html>

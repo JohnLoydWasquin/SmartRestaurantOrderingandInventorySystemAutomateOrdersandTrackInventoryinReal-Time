@@ -276,22 +276,9 @@ try {
                 <form action="../MENU/add_to_cart.php" method="POST">
                     <input type="hidden" name="menu_id" value="<?php echo htmlspecialchars($item['menu_id']); ?>">
                     <input type="hidden" name="menu_name" value="<?php echo htmlspecialchars($item['menu_name']); ?>">
-                    <label for="quantity_<?php echo $item['menu_id']; ?>">Quantity:</label>
-                    <input 
-                        type="number" 
-                        id="quantity_<?php echo $item['menu_id']; ?>" 
-                        name="quantity" 
-                        class="quantity-input" 
-                        min="1" 
-                        max="<?php echo htmlspecialchars($item['quantity']); ?>" 
-                        value="1">
-                    <button type="submit" class="add-to-cart">Add To Basket</button>
                 </form>
             </div>
         <?php endforeach; ?>
-    </div>
-    <div class="total-amount-btn">
-        <a href="../MENU/cartTable.php" class="basket-btn" id="basket-total">Add This Dish</a>
     </div>
 </div>
 <script src="../MAIN/main.js"></script>

@@ -1,6 +1,8 @@
 <?php
 session_start();  
 
+require_once '../DATABASE/mainDB.php';
+
 if (!isset($_SESSION['user_id'])) {
     echo "You must be logged in to book a table!";
     exit();
@@ -102,8 +104,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          
         } else {
            
-            $sqlInsertBooking = "INSERT INTO bookings (user_id, table_number, first_name, last_name, email, phone, booking_date, booking_time, additional_notes) 
-                                 VALUES ('$user_id', '$selectedTable', '$first_name', '$last_name', '$email', '$phone', '$booking_date', '$booking_time', '$additional_notes')";
+            $sqlInsertBooking = "INSERT INTO bookings (user_id, table_number, first_name, last_name, email, phone, booking_date, booking_time) 
+                                 VALUES ('$user_id', '$selectedTable', '$first_name', '$last_name', '$email', '$phone', '$booking_date', '$booking_time')";
 
             if ($conn->query($sqlInsertBooking) === TRUE) {
                 
