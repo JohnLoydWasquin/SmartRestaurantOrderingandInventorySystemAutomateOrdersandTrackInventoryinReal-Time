@@ -79,5 +79,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             echo json_encode(['status' => 'error', 'message' => 'Error deleting item.']);
         }
+    }elseif ($action === 'delete'){
+        $booking_id = $_POST['booking_id'];
+
+        if (empty($itemId)) {
+            echo json_encode(['status' => 'error', 'message' => 'Error: Item ID is missing.']);
+            exit;
+        }
+
+        if ($inventoryItems->deleteBooking($booking_id)) {
+            echo json_encode(['status' => 'success', 'message' => 'Item has been deleted successfully.']);
+        } else {
+            echo json_encode(['status' => 'error', 'message' => 'Error deleting item.']);
+        }
     }
 }

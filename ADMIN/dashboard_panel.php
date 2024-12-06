@@ -92,7 +92,8 @@
 
                 // INVENTORY
                 $items = $inventoryItems->getAllItems();
-                
+                $bookedTables = $inventoryItems->getBookedTables();
+
                 // DASHBOARD PAGE
                 if ($page == 'dashboard') {
                     echo '<h2>Dashboard Overview</h2>
@@ -210,7 +211,6 @@
 elseif ($page == 'booked_tables') {
     echo '<h2>Booked Tables</h2>';
     try {
-        $bookedTables = $inventoryItems->getBookedTables(); // Get booked tables from database
         echo '<table class="table table-striped mt-4">
             <thead>
                 <tr>
@@ -219,10 +219,8 @@ elseif ($page == 'booked_tables') {
                     <th>User ID</th>
                     <th>Customer Name</th>
                     <th>Email</th>
-                    <th>Phone</th>
                     <th>Booking Date</th>
                     <th>Booking Time</th>
-                    <th>Created At</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>
@@ -236,23 +234,11 @@ elseif ($page == 'booked_tables') {
                         <td>' . htmlspecialchars($table['user_id']) . '</td>
                         <td>' . htmlspecialchars($table['first_name'] . ' ' . $table['last_name']) . '</td>
                         <td>' . htmlspecialchars($table['email']) . '</td>
-                        <td>' . htmlspecialchars($table['phone']) . '</td>
                         <td>' . htmlspecialchars($table['booking_date']) . '</td>
                         <td>' . htmlspecialchars($table['booking_time']) . '</td>
-                        <td>' . htmlspecialchars($table['created_at']) . '</td>
                         <td>' . (isset($table['is_occupied']) && $table['is_occupied'] ? 'Occupied' : 'Available') . '</td>
                         <td>
-                            <button class="btn btn-sm btn-danger" onclick="openDeleteModal(
-                                \''. addslashes($table['booking_id']) .'\',
-                                \''. addslashes($table['table_number']) .'\',
-                                \''. addslashes($table['user_id']) .'\',
-                                \''. addslashes($table['first_name']) .'\',
-                                \''. addslashes($table['email']) .'\',
-                                \''. addslashes($table['phone']) .'\',
-                                \''. addslashes($table['booking_date']) .'\',
-                                \''. addslashes($table['booking_time']) .'\',
-                                \''. addslashes($table['created_at']) .'\'
-                            )">Delete</button>
+                            <button class="btn btn-sm btn-danger" onclick="openDeleteInventoryModal(\''. htmlspecialchars($table['booking_id']) .'\')">Delete</button>
                         </td>
                     </tr>';
                 }
@@ -391,23 +377,6 @@ elseif ($page == 'booked_tables') {
     // Show modal
     new bootstrap.Modal(document.getElementById('addNewItemModal')).show();
     }
-    </script>
-
-    <script>
-        function openEditModal(userId, firstName, email, role) {
-            document.getElementById('editUserId').value = userId;
-            document.getElementById('editFirstName').value = firstName;
-            document.getElementById('editEmail').value = email;
-            document.getElementById('editRole').value = role;
-
-            new bootstrap.Modal(document.getElementById('editUserModal')).show();
-        }
-
-        function deleteUser(userId) {
-            if (confirm('Are you sure you want to delete this user?')) {
-                alert(`Deleting user with ID: ${userId}`);
-            }
-        }
     </script>
     <script src="../ADMIN/bootStrapModal.js"></script>
     <script src="../ADMIN/inventoryModal.js"></script>

@@ -65,7 +65,6 @@ $orderNumber = rand(1000, 9999);
         </div>
 
         <p>Customer Name: <?php echo htmlspecialchars($customerName); ?></p>
-        <p>Table #: <?php echo htmlspecialchars($tableNumber); ?></p>
 
         <h2>Order Summary</h2>
         <?php foreach ($cart as $item): ?>

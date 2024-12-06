@@ -49,9 +49,9 @@ function openDeleteModal(userId) {
             .catch(error => {
                 console.error('Error:', error);
                 Swal.fire({
-                    icon: 'succes',
-                    title: 'success',
-                    text: 'Delete successfully!',
+                    icon: 'success',
+                    title: 'Deleted!',
+                    text: 'Successfully deleted!',
                 });
             });
         }
