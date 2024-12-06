@@ -62,7 +62,7 @@ function openDeleteInventoryModal(id) {
 }
 
 function openAddItemModal() {
-    const modal = new bootstrap.Modal(document.getElementById('addItemModal'));
+    const modal = new bootstrap.Modal(document.getElementById('addNewItemModal'));
     modal.show();
   }
   

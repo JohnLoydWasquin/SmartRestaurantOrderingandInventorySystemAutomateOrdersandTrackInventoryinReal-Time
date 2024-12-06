@@ -74,16 +74,13 @@ class InventoryManager {
                     email,
                     phone,
                     booking_date, 
-                    booking_time, 
-                    created_at
+                    booking_time
                   FROM bookings"; //
         // Execute the query
         $result = $this->conn->query($query);
         
         // Check if the query was successful
-        if (!$result) {
-            return $result->fetchAll();
-        }
+
     
         // Fetch the results into an array
         $bookedTables = [];
@@ -92,6 +89,16 @@ class InventoryManager {
         }
         
         return $bookedTables;
+    }
+
+    public function deleteBooking($booking_id) {
+        $query = "DELETE FROM bookings WHERE booking_id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $booking_id);
+        if (!$stmt->execute()) {
+            throw new Exception("Error deleting item: " . $stmt->error);
+        }
+        return true;
     }
 }
     
