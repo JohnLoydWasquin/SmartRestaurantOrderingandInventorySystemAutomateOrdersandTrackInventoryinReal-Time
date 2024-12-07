@@ -50,9 +50,11 @@ $user_id = $_SESSION['user_id'];
 $grand_total = 0;
 
 // Prepare SQL for inserting orders
-$insertOrderQuery = "INSERT INTO menusbenta (user_id, menu_id, menu_name, price, quantity, total) VALUES (?, ?, ?, ?, ?, ?)ON DUPLICATE KEY UPDATE 
-    quantity = quantity + VALUES(quantity),
-    total = total + VALUES(total)";
+$insertOrderQuery = "INSERT INTO menusbenta (user_id, menu_id, menu_name, price, quantity, total) 
+    VALUES (?, ?, ?, ?, ?, ?)
+    ON DUPLICATE KEY UPDATE 
+        quantity = VALUES(quantity), 
+        total = VALUES(total)";
 $stmt = $conn->prepare($insertOrderQuery);
 
 // Insert each cart item into the Orders table
