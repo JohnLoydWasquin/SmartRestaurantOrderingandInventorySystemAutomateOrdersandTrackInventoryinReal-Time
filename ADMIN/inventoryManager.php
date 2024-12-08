@@ -40,7 +40,6 @@ class InventoryManager {
                 throw new Exception("Error preparing query: " . $this->conn->error);
             }
     
-            // Correct parameter types to match the query (ssidi)
             $stmt->bind_param("ssidi", $name, $category, $stock, $price, $id);
         
             if (!$stmt->execute()) {

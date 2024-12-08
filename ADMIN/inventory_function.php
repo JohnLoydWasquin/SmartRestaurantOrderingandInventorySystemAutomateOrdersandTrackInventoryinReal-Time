@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
 
     if ($action === 'update') {
-        $itemId = $_POST['item_id']; // Replace user_id with id for inventory
+        $itemId = $_POST['item_id'];
         $name = $_POST['item_name'];
         $category = $_POST['category'];
         $stock = $_POST['stock'];
