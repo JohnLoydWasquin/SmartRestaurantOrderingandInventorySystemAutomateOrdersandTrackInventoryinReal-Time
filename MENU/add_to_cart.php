@@ -13,6 +13,7 @@ class Cart {
         $conn = $this->db->getConnection();
     
         // Check stock availability
+        $menu_id = (int)$_POST['menu_id'];
         $checkStockQuery = "SELECT stock, category FROM inventory WHERE id = ?";
         $stmt = $conn->prepare($checkStockQuery);
         $stmt->bind_param("i", $menu_id);
@@ -44,7 +45,7 @@ class Cart {
         return "Failed to update stock.";
     }
 
-    // Add to cart logic (same as before)
+    // Add to cart logic
     if (!isset($_SESSION['cart']) || !is_array($_SESSION['cart'])) {
         $_SESSION['cart'] = [];
     }
