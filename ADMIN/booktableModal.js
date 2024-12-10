@@ -1,72 +1,52 @@
-    function openEditModal(userId, firstName, email, role) {
-        document.getElementById('editUserId').value = userId;
-        document.getElementById('editFirstName').value = firstName;
-        document.getElementById('editEmail').value = email;
-        document.getElementById('editRole').value = role;
+function openDeleteBookingModal(userId) {
+    console.log(booking_id);
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to undo this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const formData = new FormData();
+            formData.append('action', 'delete');
+            formData.append('booking_id', booking_id);
 
-        $('#editUserModal').modal('show');
-    }
-
-    function openDeleteModal(userId) {
-        document.getElementById('deleteUserId').value = userId;
-
-        $('#deleteUserModal').modal('show');
-    }
-
-    function openEditInventoryModal(itemId, itemName, category, stock, price) {
-        document.getElementById('editItemId').value = itemId;
-        document.getElementById('editItemName').value = itemName;
-        document.getElementById('editCategory').value = category;
-        document.getElementById('editStock').value = stock;
-        document.getElementById('editPrice').value = price;
-
-        $('#editItemModal').modal('show');
-    }
-
-    function openDeleteInventoryModal(itemId) {
-        document.getElementById('deleteItemId').value = itemId;
-
-        $('#deleteItemModal').modal('show');
-    }
-
-    function openAddItemModal() {
-        document.getElementById('addItemName').value = '';
-        document.getElementById('addCategory').value = '';
-        document.getElementById('addStock').value = '';
-        document.getElementById('addPrice').value = '';
-
-        $('#addItemModal').modal('show');
-    }
-
-    function showAlert(message) {
-        Swal.fire({
-            icon: 'success',
-            title: 'Success',
-            text: message
-        });
-    }
-
-    function showErrorAlert(message) {
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: message
-        });
-    }
-
-    function showConfirmationAlert(message, confirmCallback) {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: message,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, proceed!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                confirmCallback();
-            }
-        });
-    }
+            fetch('../ADMIN/update_delete.php?page=users', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json()) // Parse JSON response
+            .then(result => {
+                console.log(userId);
+                if (result.status === 'success') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Deleted!',
+                        text: result.message,
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        location.reload();
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: result.message,
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Deleted!',
+                    text: 'Successfully deleted!',
+                });
+            });
+        }
+    });
+}
 

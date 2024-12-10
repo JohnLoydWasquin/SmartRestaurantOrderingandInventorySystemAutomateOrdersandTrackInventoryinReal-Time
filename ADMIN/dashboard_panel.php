@@ -208,24 +208,24 @@
                 }
                 
                 // BOOKED TABLES PAGE
-elseif ($page == 'booked_tables') {
-    echo '<h2>Booked Tables</h2>';
-    try {
-        echo '<table class="table table-striped mt-4">
-            <thead>
-                <tr>
-                    <th>Booking ID</th>
-                    <th>Table Number</th>
-                    <th>User ID</th>
-                    <th>Customer Name</th>
-                    <th>Email</th>
-                    <th>Booking Date</th>
-                    <th>Booking Time</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>';
+            elseif ($page == 'booked_tables') {
+                echo '<h2>Booked Tables</h2>';
+                try {
+                    echo '<table class="table table-striped mt-4">
+                        <thead>
+                            <tr>
+                                <th>Booking ID</th>
+                                <th>Table Number</th>
+                                <th>User ID</th>
+                                <th>Customer Name</th>
+                                <th>Email</th>
+                                <th>Booking Date</th>
+                                <th>Booking Time</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>';
             if (!empty($bookedTables)) {
                 foreach ($bookedTables as $table) {
                     echo '<tr>
@@ -238,7 +238,7 @@ elseif ($page == 'booked_tables') {
                         <td>' . htmlspecialchars($table['booking_time']) . '</td>
                         <td>' . (isset($table['is_occupied']) && $table['is_occupied'] ? 'Occupied' : 'Available') . '</td>
                         <td>
-                            <button class="btn btn-sm btn-danger" onclick="openDeleteInventoryModal(\''. htmlspecialchars($table['booking_id']) .'\')">Delete</button>
+                            <button class="btn btn-sm btn-danger" onclick="openDeleteBookingModal(\''. htmlspecialchars($table['booking_id']) .'\')">Delete</button>
                         </td>
                     </tr>';
                 }
@@ -380,5 +380,6 @@ elseif ($page == 'booked_tables') {
     </script>
     <script src="../ADMIN/bootStrapModal.js"></script>
     <script src="../ADMIN/inventoryModal.js"></script>
+    <script src="booktableModal.js"></script>
 </body>
 </html>
